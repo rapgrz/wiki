@@ -12,7 +12,7 @@
                     <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Title" name="title" maxlength="200" required><br>
                     <label for="category">Choose category</label>
                     <select id="category" class="form-control" required>
-                        <option selected>Choose...</option>
+                        <option selected disabled>Choose...</option>
                         <option>TESTCAT1</option>
                         <option>TESTCAT2</option>
                         <option>TESTCAT3</option>

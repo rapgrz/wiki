@@ -43,7 +43,7 @@ class PostsController extends Controller
         $post->author = Auth::user()->name;
         $post->save();
 
-        return redirect(route('create_post'));
+        return redirect(route('posts'));
     }
 
 }

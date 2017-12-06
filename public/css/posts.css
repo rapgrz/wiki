@@ -8,3 +8,7 @@
 .panel{
     word-break: break-all;
 }
+
+.btn-secondary{
+    left: 200px;
+}
