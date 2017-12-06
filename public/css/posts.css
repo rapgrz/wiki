@@ -1,0 +1,10 @@
+.col-md-10{
+    left: 200px;
+    max-width: 1000px;
+    margin:10px auto;
+    -moz-border-radius-topleft: 10px 40px;
+}
+
+.panel{
+    word-break: break-all;
+}
