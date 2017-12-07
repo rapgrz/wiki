@@ -10,7 +10,7 @@
                     <div class="panel panel-default">
 
                         <div class="panel-heading"><h3 class="panel-title"><img src="{{URL::asset('images/title_logo.png')}}" height="32" width="32"> {{ $post->title }}
-                                @if($post->user->name ==  Auth::user()->name)
+                                @if($post->user->email == Auth::user()->email)
                                     <div class="buttons pull-right">
                                         <a href="#">
                                         <img src="{{URL::asset('images/edit_logo.png')}}" height="28" width="28"> &nbsp;
