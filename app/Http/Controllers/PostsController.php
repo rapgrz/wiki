@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Post;
 use App\PostModel;
 use Illuminate\Http\Request;
 use Faker;
@@ -19,17 +21,18 @@ class PostsController extends Controller
     public function index(){
 
         $posts = PostModel::all();
-        $parametras = "Mano paasdsadsadsadrametras";
+
 
         return view("posts.index", array(
-            'posts' => $posts,
-            'parametras' => $parametras
+            'posts' => $posts
         ));
     }
     
     public function create_post()
     {
-        return view("create_post.index");
+        $categories = Category::all();
+        
+        return view("create_post.index", array('categories' => $categories));
     }
 
     public function savePost(Request $request){
@@ -38,9 +41,9 @@ class PostsController extends Controller
         $post = new PostModel();
         $post->content = $data['content'];
         $post->title = $data['title'];
-       // $categories->name = $data['categories'];
+        $post->category_id = $data['category_id'];
         $post->user_id =  Auth::user()->id;
-        $post->author = Auth::user()->name;
+        //$post->author = Auth::user()->name;
         $post->save();
 
         return redirect(route('posts'));

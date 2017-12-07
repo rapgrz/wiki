@@ -13,4 +13,19 @@ class PostModel extends Model
      * @var string
      */
     protected $table = 'posts';
+
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+    public function comment()
+    {
+        return $this->belongsTo('App\Comment');
+    }
+    
 }
