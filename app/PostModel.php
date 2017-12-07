@@ -13,8 +13,6 @@ class PostModel extends Model
      * @var string
      */
     protected $table = 'posts';
-
-
     public function category()
     {
         return $this->belongsTo('App\Category');
@@ -25,7 +23,7 @@ class PostModel extends Model
     }
     public function comment()
     {
-        return $this->belongsTo('App\Comment');
+        return $this->hasMany('App\Comment', 'post_id');
     }
     
 }

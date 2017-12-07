@@ -49,4 +49,11 @@ class PostsController extends Controller
         return redirect(route('posts'));
     }
 
+    public function deletePost(Request $request){
+        $data = $request->all();
+        
+
+        return redirect(route('posts'));
+    }
+
 }

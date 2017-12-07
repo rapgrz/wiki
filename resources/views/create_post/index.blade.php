@@ -9,7 +9,7 @@
             <div class="col-md-7">
                 <form action="{{ route('save_post') }}" method="POST">
                     <label for="title">Type your post title</label>
-                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Title" name="title" maxlength="200" required><br>
+                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Title" name="title" maxlength="80" required><br>
                     <label for="category">Choose category</label>
 
                     <select id="category" class="form-control" name="category_id" required>
@@ -20,7 +20,7 @@
                     </select><br>
                     {{ csrf_field() }}
                     <textarea name="content"></textarea><br>
-                    <input type="submit" value="Create Post">
+                    <input type="submit" class="btn btn-primary" value="Create Post">
                 </form>
 
             </div>

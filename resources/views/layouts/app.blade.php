@@ -65,8 +65,8 @@
                                                Create post
                                            </a>
                                        </li>
-                                       <li class="disabled">
-                                           <a href="#">
+                                       <li class>
+                                           <a href="{{ route('categories')}}">
                                                Categories
                                            </a>
                                        </li>

@@ -10,7 +10,7 @@ class Comment extends Model
     protected $table = 'comments';
 
     public function post(){
-        return $this->hasMany('App\PostModel');
+        return $this->belongsTo('App\PostModel', 'post_id');
     }
     public function user(){
         return $this->hasOne('App\PostModel');
