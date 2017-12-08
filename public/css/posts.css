@@ -9,12 +9,21 @@
     word-break: break-all;
 }
 
-input.edit{
-    color: red;
-    right: 300px;
+.edit{
+    position: absolute;
+    align-items: center;
+    right: 80px;
 }
 
-input.trash{
-    margin: 100px;
-    left: 20px;
+.destroy{
+    position: relative;
+    align-items: center;
+    right: 10px;
+    top: 4px;
+}
+
+.title{
+    position: relative;
+    align-items: center;
+    right: 4px;
 }

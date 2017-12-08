@@ -10,14 +10,14 @@
 
                     <div class="panel panel-default">
 
-                        <div class="panel-heading"><h3 class="panel-title"><img src="{{URL::asset('images/title_logo.png')}}" height="32" width="32"> {{ $post->title }}
+                        <div class="panel-heading"><h3 class="panel-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="35" width="35"></span> {{ $post->title }}
                                 @if($post->user->email == Auth::user()->email)
                                     <div class="buttons pull-right">
                                         {{ Form::open([ 'method'  => 'patch', 'route' => [ 'posts.edit', $post->id ] ]) }}
-                                            <input class="edit" type="image" src="{{URL::asset('images/edit_logo.png')}}" height="26" width="26"/>
+                                            <span class="edit"><input type="image" src="{{URL::asset('images/edit_logo.png')}}" height="28" width="28"/></span>
                                         {{ Form::close() }}
                                         {{ Form::open([ 'method'  => 'delete', 'route' => [ 'posts.destroy', $post->id ] ]) }}
-                                            <input class="destroy" type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
+                                        <span class="destroy"><input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                                         {{ Form::close() }}
                                     </div>
                                 @endif</h3></div>
@@ -32,7 +32,9 @@
                     </div>
                 @endforeach
                 </form>
+                <div class="links pull-right">
                 {{ $posts->links() }}
+            </div>
             </div>
             </div>
     </div>
