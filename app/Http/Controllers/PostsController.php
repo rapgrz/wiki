@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
 use App\Post;
 use App\PostModel;
 use Illuminate\Http\Request;
@@ -49,10 +50,15 @@ class PostsController extends Controller
         return redirect(route('posts'));
     }
 
-    public function deletePost(Request $request){
-        $data = $request->all();
-        
+    public function destroy($id){
+        $post = Post::findOrFail($id);
+        $post->delete();
 
+        return redirect(route('posts'));
+    }
+    
+    public function edit($id){
+        $post = Post::findOrFail($id);
         return redirect(route('posts'));
     }
 
