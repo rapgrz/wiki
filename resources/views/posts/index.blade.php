@@ -1,6 +1,7 @@
-<link rel="stylesheet" href="{{ URL::asset('css/posts.css') }}" />
+
 @extends('layouts.app')
 @section('content')
+    <link rel="stylesheet" href="{{ URL::asset('css/posts.css') }}" />
     <div class="container">
         <div class="row">
             <div class="col-md-10">
@@ -12,11 +13,11 @@
                         <div class="panel-heading"><h3 class="panel-title"><img src="{{URL::asset('images/title_logo.png')}}" height="32" width="32"> {{ $post->title }}
                                 @if($post->user->email == Auth::user()->email)
                                     <div class="buttons pull-right">
-                                        {{ Form::open([ 'method'  => 'update', 'route' => [ 'posts.edit', $post->id ] ]) }}
-                                            <input type="image" src="{{URL::asset('images/edit_logo.png')}}" height="26" width="26"/>
+                                        {{ Form::open([ 'method'  => 'patch', 'route' => [ 'posts.edit', $post->id ] ]) }}
+                                            <input class="edit" type="image" src="{{URL::asset('images/edit_logo.png')}}" height="26" width="26"/>
                                         {{ Form::close() }}
                                         {{ Form::open([ 'method'  => 'delete', 'route' => [ 'posts.destroy', $post->id ] ]) }}
-                                            <input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
+                                            <input class="destroy" type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
                                         {{ Form::close() }}
                                     </div>
                                 @endif</h3></div>
@@ -31,6 +32,7 @@
                     </div>
                 @endforeach
                 </form>
+                {{ $posts->links() }}
             </div>
             </div>
     </div>

@@ -8,3 +8,13 @@
 .panel{
     word-break: break-all;
 }
+
+input.edit{
+    color: red;
+    right: 300px;
+}
+
+input.trash{
+    margin: 100px;
+    left: 20px;
+}

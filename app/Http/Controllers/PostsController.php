@@ -9,6 +9,7 @@ use App\PostModel;
 use Illuminate\Http\Request;
 use Faker;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
 
 
 class PostsController extends Controller
@@ -21,7 +22,7 @@ class PostsController extends Controller
     //
     public function index(){
 
-        $posts = PostModel::all();
+        $posts = PostModel::paginate(10);
 
 
         return view("posts.index", array(
@@ -49,6 +50,10 @@ class PostsController extends Controller
 
         return redirect(route('posts'));
     }
+    public function show($id){
+        $post = Post::find($id);
+        return view('posts.edit');
+    }
 
     public function destroy($id){
         $post = Post::findOrFail($id);
@@ -59,7 +64,17 @@ class PostsController extends Controller
     
     public function edit($id){
         $post = Post::findOrFail($id);
-        return redirect(route('posts'));
+
+        return view('posts.edit');
     }
 
+    public function update($id){
+        $post = Post::find($id);
+        $post->title       = Input::get('title');
+        $post->content      = Input::get('content');
+        $post->category = Input::get('category');
+        $post->save();
+
+
+    }
 }
