@@ -23,10 +23,11 @@ class PostsController extends Controller
     public function index(){
 
         $posts = PostModel::paginate(10);
-
+        $categories = Category::all();
 
         return view("posts.index", array(
-            'posts' => $posts
+            'posts' => $posts,
+            'categories' => $categories
         ));
     }
     
@@ -51,25 +52,25 @@ class PostsController extends Controller
         return redirect(route('posts'));
     }
     public function show($id){
-        $post = Post::find($id);
+        $post = PostModel::find($id);
         return view('posts.edit');
     }
 
     public function destroy($id){
-        $post = Post::findOrFail($id);
+        $post = PostModel::findOrFail($id);
         $post->delete();
 
         return redirect(route('posts'));
     }
     
     public function edit($id){
-        $post = Post::findOrFail($id);
+        $post = PostModel::findOrFail($id);
 
         return view('posts.edit');
     }
 
     public function update($id){
-        $post = Post::find($id);
+        $post = PostModel::find($id);
         $post->title       = Input::get('title');
         $post->content      = Input::get('content');
         $post->category = Input::get('category');

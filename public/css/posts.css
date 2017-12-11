@@ -1,5 +1,5 @@
 .col-md-10{
-    left: 200px;
+    left: 300px;
     max-width: 1000px;
     margin:10px auto;
     -moz-border-radius-topleft: 10px 40px;
@@ -26,4 +26,10 @@
     position: relative;
     align-items: center;
     right: 4px;
+}
+
+.col-md-2{
+    position: absolute;
+    left: 200px;
+    width: 350px;
 }

@@ -11,15 +11,27 @@
                     <input type="submit" class="btn btn-primary" value="Create Category">
                 </form>
                 <br><br><br>
-                <form action="" method="POST">
-                    <label for="title">Update existing category</label>
-                    <select id="category" class="form-control" name="category_id" required>
-                        <option selected disabled>Choose...</option>
+                    <label for="title">Delete existing category</label>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
                     @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <tr>
+                            <td>{{$category->name}}</td>
+                            <td>
+                            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'categories.destroy', $category->id ] ]) }}
+                            <input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
+                            {{ Form::close() }}
+                            </td>
+                        </tr>
                     @endforeach
-                    </form>
-                </select>
+                            </tbody>
+                    </table>
             </div>
         </div>
     </div>

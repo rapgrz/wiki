@@ -27,7 +27,12 @@ class CategoryController extends Controller
             'categories' => $categories
         ));
     }
+    public function destroy($id){
+        $category = Category::findOrFail($id);
+        $category->delete();
 
+        return redirect(route('categories'));
+    }
     public function saveCategory(Request $request){
         $data = $request->all();
 
