@@ -1,0 +1,11 @@
+.edit{
+    position: relative;
+    right: 20px;
+    top: 15px;
+}
+
+.destroy{
+    position: relative;
+    left: 40px;
+    top: -15px;
+}

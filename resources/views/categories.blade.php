@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    <link rel="stylesheet" href="{{ URL::asset('css/categories.css') }}" />
     <div class="container">
         <div class="row">
             <div class="col-md-7">
@@ -11,7 +12,7 @@
                     <input type="submit" class="btn btn-primary" value="Create Category">
                 </form>
                 <br><br><br>
-                    <label for="title">Delete existing category</label>
+                    <label for="title">Manage existing category</label>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -24,8 +25,9 @@
                         <tr>
                             <td>{{$category->name}}</td>
                             <td>
+                                <span class="edit"> <input type="image" src="{{URL::asset('images/edit_logo.png')}}" height="28" width="28"/></span>&nbsp;
                             {{ Form::open([ 'method'  => 'delete', 'route' => [ 'categories.destroy', $category->id ] ]) }}
-                            <input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
+                                    <span class="destroy"> <input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                             {{ Form::close() }}
                             </td>
                         </tr>

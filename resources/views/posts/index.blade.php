@@ -2,6 +2,7 @@
 @extends('layouts.app')
 @section('content')
     <link rel="stylesheet" href="{{ URL::asset('css/posts.css') }}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <div class="container">
         <div class="row">
             <div class="col-md-2">
@@ -19,9 +20,7 @@
             <div class="col-md-10">
                 <form>
                 @foreach($posts as $post)
-
                     <div class="panel panel-default">
-
                         <div class="panel-heading"><h3 class="panel-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="35" width="35"></span> {{ $post->title }}
                                 @if($post->user->email == Auth::user()->email)
                                     <div class="buttons pull-right">
