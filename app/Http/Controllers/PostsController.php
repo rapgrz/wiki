@@ -22,7 +22,7 @@ class PostsController extends Controller
     //
     public function index(){
 
-        $posts = PostModel::paginate(10);
+        $posts = PostModel::orderBy('id', 'created_at')->paginate(10);
         $categories = Category::all();
 
         return view("posts.index", array(
