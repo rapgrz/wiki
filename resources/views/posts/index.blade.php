@@ -18,16 +18,13 @@
                     </div>
             </div>
             <div class="col-md-10">
-                <form>
                 @foreach($posts as $post)
                     <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="panel-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="35" width="35"></span> {{ $post->title }}
                                 @if($post->user->email == Auth::user()->email)
                                     <div class="buttons pull-right">
-                                        {{ Form::open([ 'method'  => 'patch', 'route' => [ 'posts.edit', $post->id ] ]) }}
-                                            <span class="edit"><input type="image" src="{{URL::asset('images/edit_logo.png')}}" height="28" width="28"/></span>
-                                        {{ Form::close() }}
-                                        {{ Form::open([ 'method'  => 'delete', 'route' => [ 'posts.destroy', $post->id ] ]) }}
+                                        <span class="edit"><a href="{{ route('post_edit',['post_id' => $post->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
+                                        {{ Form::open([ 'method'  => 'post', 'route' => [ 'post_delete', $post->id ] ]) }}
                                         <span class="destroy"><input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                                         {{ Form::close() }}
                                     </div>
@@ -42,7 +39,6 @@
                         </div>
                     </div>
                 @endforeach
-                </form>
                 <div class="links pull-right">
                 {{ $posts->links() }}
             </div>

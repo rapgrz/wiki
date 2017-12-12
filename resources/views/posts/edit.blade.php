@@ -7,16 +7,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                {{// Form::model($post, array('route' => array('posts.update', $post->id), 'method' => 'PUT')) }}
-                <form action="{{ route('posts.update') }}" method="POST">
-                    <label for="title">{{$post->title}}</label>
-                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Title" name="title" maxlength="70" required><br>
+
+                <form action="{{ route('post_update', ['post_id' => $post->id]) }}" method="POST">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Title" name="title" maxlength="70" value="{{$post->title}}" required><br>
                     <label for="category">Choose category</label>
 
                     <select id="category" class="form-control" name="category_id" required>
-                        <option selected>{{$post->category}}</option>
                         @foreach($categories as $category):
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" @if($post->category->id == $category->id) selected @endif>{{ $category->name }}</option>
                         @endforeach
                     </select><br>
                     {{ csrf_field() }}

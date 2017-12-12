@@ -18,7 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('posts', 'PostsController');
+/*Route::resource('posts', 'PostsController');*/
+Route::get('/posts/edit/{post_id}', 'PostsController@edit')->name('post_edit');
+Route::post('/posts/delete/{post_id}', 'PostsController@destroy')->name('post_delete');
+Route::post('/posts/post_update/{post_id}}', 'PostsController@update')->name('post_update');
 Route::resource('categories', 'CategoryController');
 Route::get('/posts', 'PostsController@index')->name('posts');
 Route::get('/create_post', 'PostsController@create_post')->name('create_post');

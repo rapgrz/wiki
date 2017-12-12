@@ -30,7 +30,7 @@ class CategoryController extends Controller
     public function destroy($id){
         $category = Category::findOrFail($id);
         $category->delete();
-
+        
         return redirect(route('categories'));
     }
     public function saveCategory(Request $request){
@@ -41,6 +41,12 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect(route('posts'));
+    }
+
+    public function edit($id){
+        $category = Category::findorFail($id);
+
+        return view('categories.edit');
     }
 
 }

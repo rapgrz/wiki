@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Faker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Input;
 
 
 class PostsController extends Controller
@@ -42,6 +43,7 @@ class PostsController extends Controller
         $data = $request->all();
 
         $post = new PostModel();
+        
         $post->content = $data['content'];
         $post->title = $data['title'];
         $post->category_id = $data['category_id'];
@@ -65,17 +67,22 @@ class PostsController extends Controller
     
     public function edit($id){
         $post = PostModel::findOrFail($id);
+        $categories = Category::all();
 
-        return view('posts.edit');
+        return view('posts.edit', [
+            'post' => $post,
+            'categories' => $categories
+        ]);
     }
 
     public function update($id){
         $post = PostModel::find($id);
-        $post->title       = Input::get('title');
-        $post->content      = Input::get('content');
-        $post->category = Input::get('category');
+        $post->title = Input::get('title');
+        $post->content = Input::get('content');
+        $post->category_id = Input::get('category_id');
         $post->save();
-
+        
+        return redirect(route('posts'));
 
     }
 }
