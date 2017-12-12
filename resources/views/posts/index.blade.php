@@ -5,6 +5,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <div class="container">
         <div class="row">
+            <div class="col-sm-6 col-sm-offset-4">
+                <span class="search">
+                <div id="imaginary_container">
+                    <div class="input-group stylish-input-group">
+                        <input type="text" class="form-control"  placeholder="Search by post title" >
+                    <span class="input-group-addon">
+                            <button type="button" class="btn btn-primary btn-xs">Search</button>
+                    </span>
+                    </div>
+                </div>
+                    </span>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 <img src="{{URL::asset('images/category_logo.png')}}" height="23" width="23">&nbsp;Categories <br><br>
                 <div class="panel panel-default">

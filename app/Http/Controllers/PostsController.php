@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Faker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 
@@ -81,8 +82,17 @@ class PostsController extends Controller
         $post->content = Input::get('content');
         $post->category_id = Input::get('category_id');
         $post->save();
-        
+
         return redirect(route('posts'));
 
+    }
+
+    public function search(){
+
+
+        $posts = DB::select('select * from posts where title LIKE %:search%', ['search' => $search]);
+
+        $count = count($posts);
+        
     }
 }
