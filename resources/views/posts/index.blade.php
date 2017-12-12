@@ -29,7 +29,7 @@
                                         {{ Form::close() }}
                                     </div>
                                 @endif</h3></div>
-                        <div class="panel-body">Įrašas: {!! html_entity_decode($post->content) !!}</div>
+                        <div class="panel-body"> {!! html_entity_decode($post->content) !!}</div>
                         <div class="panel-footer">
                             <img src="{{URL::asset('images/user_logo.png')}}" height="23" width="23">     {{ $post->user->name }} &nbsp; &nbsp;
                             <img src="{{URL::asset('images/date_logo.png')}}" height="23" width="23"> {{  $post->created_at }} &nbsp; &nbsp;

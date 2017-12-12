@@ -8,6 +8,7 @@ use App\PostModel;
 use Illuminate\Http\Request;
 use Faker;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 
 class CategoryController extends Controller
@@ -30,7 +31,7 @@ class CategoryController extends Controller
     public function destroy($id){
         $category = Category::findOrFail($id);
         $category->delete();
-        
+
         return redirect(route('categories'));
     }
     public function saveCategory(Request $request){
@@ -40,13 +41,22 @@ class CategoryController extends Controller
         $category->name = $data['category'];
         $category->save();
 
-        return redirect(route('posts'));
+        return redirect(route('categories'));
     }
 
     public function edit($id){
-        $category = Category::findorFail($id);
-
-        return view('categories.edit');
+        $category = Category::findOrFail($id);
+        return view('category_edit', array(
+            'categories' => $category
+        ));
     }
 
+    public function update($id){
+        $category = Category::find($id);
+        $category->name = Input::get('name');
+        $category->save();
+
+        return redirect(route('categories'));
+
+    }
 }

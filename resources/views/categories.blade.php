@@ -25,10 +25,10 @@
                         <tr>
                             <td>{{$category->name}}</td>
                             <td>
-                                {{ Form::open([ 'method'  => 'put', 'route' => [ 'categories.edit', $category->id ] ]) }}
-                                <span class="edit"> <input type="image" src="{{URL::asset('images/edit_logo.png')}}" height="28" width="28"/></span>&nbsp;
+                                <span class="edit"><a href="{{ route('category_edit',['category_id' => $category->id ] ) }}">
+                                        <img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>&nbsp;
                                 {{ Form::close() }}
-                            {{ Form::open([ 'method'  => 'delete', 'route' => [ 'categories.destroy', $category->id ] ]) }}
+                            {{ Form::open([ 'method'  => 'post', 'route' => [ 'category_delete', $category->id ] ]) }}
                                     <span class="destroy"> <input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                             {{ Form::close() }}
                             </td>
