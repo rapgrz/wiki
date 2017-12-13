@@ -25,7 +25,6 @@ class PostsController extends Controller
     public function index(){
 
         $posts = PostModel::orderBy('id', 'created_at')->paginate(10);
-
         $categories = Category::all();
 
         return view("posts.index", array(
@@ -94,15 +93,10 @@ class PostsController extends Controller
         $posts = PostModel::where('title', 'like', "%$search%")->paginate(10);
         $count = count($posts);
 
-        if($count == 0){
-           return view("posts.index");
-        }
-
-        else{
             return view("posts.index", array(
                 'posts' => $posts
             ));
-        }
+
     }
     
     public function search_category($id){
