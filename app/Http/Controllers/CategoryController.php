@@ -20,12 +20,13 @@ class CategoryController extends Controller
     }
     //
     public function index(){
-
+        $posts = PostModel::all();
         $categories = Category::all();
 
 
         return view("categories", array(
-            'categories' => $categories
+            'categories' => $categories,
+            'posts' => $posts
         ));
     }
     public function destroy($id){

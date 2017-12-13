@@ -49,7 +49,6 @@ class PostsController extends Controller
         $post->title = $data['title'];
         $post->category_id = $data['category_id'];
         $post->user_id =  Auth::user()->id;
-        //$post->author = Auth::user()->name;
         $post->save();
 
         return redirect(route('posts'));
@@ -94,14 +93,13 @@ class PostsController extends Controller
         $posts = PostModel::where('title', 'like', "%$search%")->paginate(10);
         $count = count($posts);
 
-        if($count < 0){
-           return view("badSearch");
+        if($count == 0){
+           return view("posts.index");
         }
 
         else{
             return view("posts.index", array(
-                'posts' => $posts,
-                'categories' => $categories
+                'posts' => $posts
             ));
         }
     }
@@ -111,8 +109,15 @@ class PostsController extends Controller
         $categories = Category::all();
 
         return view("posts.index", array(
-            'posts' => $posts,
-            'categories' => $categories
+            'posts' => $posts
+        ));
+    }
+    public function postShow($id){
+
+        $post = PostModel::find($id);
+       
+        return view("posts.show", array(
+           'post' => $post
         ));
     }
 }

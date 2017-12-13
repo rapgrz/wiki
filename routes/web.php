@@ -31,3 +31,5 @@ Route::post('create_post/save', 'PostsController@savePost')->name('save_post');
 Route::get('/categories', 'CategoryController@index')->name('categories');
 Route::post('/categories/save', 'CategoryController@saveCategory')->name('saveCategory');
 Route::get('/posts/search/category/{category_id}', 'PostsController@search_category')->name('search_category');
+
+Route::get('/post/{post_id}', 'PostsController@postShow')->name('postShow');
