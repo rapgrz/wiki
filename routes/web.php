@@ -24,9 +24,10 @@ Route::post('/posts/post_update/{post_id}', 'PostsController@update')->name('pos
 Route::get('/categories/edit/{category_id}', 'CategoryController@edit')->name('category_edit');
 Route::post('/categories/delete/{category_id}', 'CategoryController@destroy')->name('category_delete');
 Route::post('/categories/update/{category_id}', 'CategoryController@update')->name('category_update');
+Route::post('/posts/search', 'PostsController@search')->name('post_search');
 Route::get('/posts', 'PostsController@index')->name('posts');
 Route::get('/create_post', 'PostsController@create_post')->name('create_post');
 Route::post('create_post/save', 'PostsController@savePost')->name('save_post');
 Route::get('/categories', 'CategoryController@index')->name('categories');
 Route::post('/categories/save', 'CategoryController@saveCategory')->name('saveCategory');
-
+Route::get('/posts/search/category/{category_id}', 'PostsController@search_category')->name('search_category');

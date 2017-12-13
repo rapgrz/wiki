@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    <link rel="stylesheet" href="{{ URL::asset('css/categories_edit.css') }}" />
     <div class="container">
     <div class="row">
         <div class="col-md-7">
@@ -9,9 +9,11 @@
                 {{ csrf_field() }}
                 <label for="category">Edit category</label>
                 <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Title" name="name" maxlength="30" value="{{$categories->name}}" required><br><br>
-                <input type="submit" class="btn btn-primary" value="Update category">
-                </form>
-            </div>
+                <input type="submit" class="btn btn-primary" value="Update category"></form>
+            <span class="cancel">
+            <button class="btn btn-default" onclick="window.location='{{ URL::previous() }}'">Cancel</button>
+                </span>
+        </div>
         </div>
         </div>
 @endsection

@@ -6,13 +6,15 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-4">
-                <span class="search">
+                <form action="{{ route('post_search') }}" method="POST">
+                    {{ csrf_field() }}
                 <div id="imaginary_container">
                     <div class="input-group stylish-input-group">
-                        <input type="text" class="form-control"  placeholder="Search by post title" >
+                        <input type="text" class="form-control"  placeholder="Search by post title" name="search">
                     <span class="input-group-addon">
-                            <button type="button" class="btn btn-primary btn-xs">Search</button>
-                    </span>
+                            <button type="submit" class="btn btn-primary btn-xs">Search</button>
+
+                </form>
                     </div>
                 </div>
                     </span>
@@ -25,7 +27,8 @@
                         <span class="categories">
                 @foreach($categories as $category)
                                 <div class="panel-footer">
-                    {{$category->name}} <br>
+                                <a href="{{ route('search_category', ['category_id' => $category->id]) }}">
+                    {{$category->name}} </a><br>
                     </div>
                 @endforeach
                         </span>

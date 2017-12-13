@@ -87,12 +87,32 @@ class PostsController extends Controller
 
     }
 
-    public function search(){
-
-
-        $posts = DB::select('select * from posts where title LIKE %:search%', ['search' => $search]);
-
+    public function search(Request $request){
+        $data = $request->all();
+        $search = $data['search'];
+        $categories = Category::all();
+        $posts = PostModel::where('title', 'like', "%$search%")->paginate(10);
         $count = count($posts);
-        
+
+        if($count < 0){
+           return view("badSearch");
+        }
+
+        else{
+            return view("posts.index", array(
+                'posts' => $posts,
+                'categories' => $categories
+            ));
+        }
+    }
+    
+    public function search_category($id){
+        $posts = PostModel::where('category_id', '=', $id)->paginate(10);
+        $categories = Category::all();
+
+        return view("posts.index", array(
+            'posts' => $posts,
+            'categories' => $categories
+        ));
     }
 }
