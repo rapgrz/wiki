@@ -34,3 +34,16 @@
     width: 850px;
 
 }
+.editComment{
+    position: absolute;
+    align-items: center;
+    right: 60px;
+    top: 7px;
+}
+
+.destroyComment{
+    position: relative;
+    align-items: center;
+    right: 10px;
+    top: 3px;
+}

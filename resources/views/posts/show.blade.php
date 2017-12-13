@@ -78,7 +78,13 @@
             <div class="col-sm-5">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>Author</strong> <span class="text-muted">commented 5 days ago</span>
+                        <strong>Author</strong> <span class="text-muted">commented {{$comment->created_at}}</span>
+                        <div class="buttons pull-right">
+                            <span class="editComment"><a href="{{ route('editComment',['comment_id' => $comment->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
+                            {{ Form::open([ 'method'  => 'post', 'route' => [ 'destroyComment', $comment->id ] ]) }}
+                            <span class="destroyComment"><input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                            {{ Form::close() }}
+                        </div>
                     </div>
                     <div class="panel-body">
                         {!! html_entity_decode($comment->content) !!}

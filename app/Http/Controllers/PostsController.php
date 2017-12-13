@@ -53,10 +53,6 @@ class PostsController extends Controller
 
         return redirect(route('posts'));
     }
-    public function show($id){
-        $post = PostModel::find($id);
-        return view('posts.edit');
-    }
 
     public function destroy($id){
         $post = PostModel::findOrFail($id);
@@ -126,5 +122,29 @@ class PostsController extends Controller
         $comment->save();
 
         return redirect()->back();
+    }
+    public function destroyComment($id){
+        $comment = Comment::findOrFail($id);
+        $comment->delete();
+
+        return redirect()->back();
+    }
+    public function editComment($id){
+        $post = PostModel::all();
+        $comment = Comment::findOrFail($id);
+
+
+        return view('posts.editComment', [
+            'post' => $post,
+            'comment' => $comment
+        ]);
+    }
+    public function updateComment($id){
+        $comment = Comment::find($id);
+        $comment->content = Input::get('content');
+        $comment->save();
+
+        return redirect(route('posts'));
+
     }
 }

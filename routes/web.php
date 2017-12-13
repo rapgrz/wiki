@@ -33,3 +33,6 @@ Route::post('/categories/save', 'CategoryController@saveCategory')->name('saveCa
 Route::get('/posts/search/category/{category_id}', 'PostsController@search_category')->name('search_category');
 Route::get('/post/{post_id}', 'PostsController@postShow')->name('postShow');
 Route::post('/post/{post_id}/comment', 'PostsController@addComment')->name('addComment');
+Route::post('/post/comment/{comment_id}', 'PostsController@destroyComment')->name('destroyComment');
+Route::get('/posts/edit/comment/{comment_id}', 'PostsController@editComment')->name('editComment');
+Route::post('/posts/commentUpdate/{comment_id}', 'PostsController@updateComment')->name('updateComment');
