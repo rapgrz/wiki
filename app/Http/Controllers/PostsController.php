@@ -25,6 +25,7 @@ class PostsController extends Controller
     public function index(){
 
         $posts = PostModel::orderBy('id', 'created_at')->paginate(10);
+
         $categories = Category::all();
 
         return view("posts.index", array(
@@ -119,5 +120,17 @@ class PostsController extends Controller
         return view("posts.show", array(
            'post' => $post
         ));
+    }
+    public function addComment(Request $request, $id){
+        $data = $request->all();
+
+        $comment = new Comment();
+
+        $comment->content = $data['content'];
+        $comment->post_id = $id;
+        $comment->user_id =  Auth::user()->id;
+        $comment->save();
+
+        return redirect()->back();
     }
 }
