@@ -41,7 +41,7 @@
                                     <div class="buttons pull-right">
                                         <span class="edit"><a href="{{ route('post_edit',['post_id' => $post->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
                                         {{ Form::open([ 'method'  => 'post', 'route' => [ 'post_delete', $post->id ] ]) }}
-                                        <span class="destroy"><input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                                        <span class="destroy"><input type="image" onclick="return confirm('Are you sure you want delete this post?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                                         {{ Form::close() }}
                                     </div>
                                 @endif</h3></div>

@@ -13,6 +13,6 @@ class Comment extends Model
         return $this->belongsTo('App\PostModel', 'post_id');
     }
     public function user(){
-        return $this->hasOne('App\PostModel');
+        return $this->belongsTo('App\User');
     }
 }

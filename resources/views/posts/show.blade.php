@@ -78,7 +78,7 @@
             <div class="col-sm-5">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>Author</strong> <span class="text-muted">commented {{$comment->created_at}}</span>
+                        <strong>Author {{ $comment->user->name }}</strong> <span class="text-muted">commented {{$comment->created_at}}</span>
                         <div class="buttons pull-right">
                             <span class="editComment"><a href="{{ route('editComment',['comment_id' => $comment->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
                             {{ Form::open([ 'method'  => 'post', 'route' => [ 'destroyComment', $comment->id ] ]) }}
