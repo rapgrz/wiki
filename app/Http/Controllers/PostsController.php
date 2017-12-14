@@ -26,7 +26,7 @@ class PostsController extends Controller
 
         $posts = PostModel::orderBy('id', 'created_at')->paginate(10);
         $categories = Category::all();
-
+        
         return view("posts.index", array(
             'posts' => $posts,
             'categories' => $categories

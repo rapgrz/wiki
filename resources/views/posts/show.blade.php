@@ -64,7 +64,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <strong>{{ $comment->user->name }}</strong> <span class="text-muted">commented {{$comment->created_at}}</span>
-                        @if($comment->user->email == Auth::user()->email)
+                        @if($comment->user->email == Auth::user()->email || $post->user->access_level == 10)
                         <div class="buttons pull-right">
                             <span class="editComment"><a href="{{ route('editComment',['comment_id' => $comment->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
                             {{ Form::open([ 'method'  => 'post', 'route' => [ 'destroyComment', $comment->id ] ]) }}

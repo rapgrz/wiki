@@ -70,6 +70,13 @@
                                                Categories
                                            </a>
                                        </li>
+                                       @if(Auth::user()->access_level == 10)
+                                       <li class>
+                                           <a href="{{ route('users')}}">
+                                                Users
+                                           </a>
+                                       </li>
+                                   @endif
                                    </ul>
                                </li>
                             <li class="dropdown">

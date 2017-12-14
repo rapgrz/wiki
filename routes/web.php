@@ -36,3 +36,4 @@ Route::post('/post/{post_id}/comment', 'PostsController@addComment')->name('addC
 Route::post('/post/comment/{comment_id}', 'PostsController@destroyComment')->name('destroyComment');
 Route::get('/posts/edit/comment/{comment_id}', 'PostsController@editComment')->name('editComment');
 Route::post('/posts/commentUpdate/{comment_id}', 'PostsController@updateComment')->name('updateComment');
+Route::post('/users', 'UsersController@index')->name('users');

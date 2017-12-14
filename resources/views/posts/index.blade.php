@@ -46,7 +46,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="panel-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="35" width="35"></span>
                                 <a href="{{ route('postShow', ['post_id' => $post->id]) }}">{{ $post->title }}</a>
-                                @if($post->user->email == Auth::user()->email)
+                                @if($post->user->email == Auth::user()->email || Auth::user()->access_level == 10)
                                     <div class="buttons pull-right">
                                         <span class="edit">
                                             <a href="{{ route('post_edit',['post_id' => $post->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a>
