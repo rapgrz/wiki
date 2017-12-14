@@ -29,7 +29,9 @@
                                         <img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>&nbsp;
                                 {{ Form::close() }}
                             {{ Form::open([ 'method'  => 'post', 'route' => [ 'category_delete', $category->id ] ]) }}
-                                    <span class="destroy"> <input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                                    <span class="destroy">
+                                        <input type="image" onclick="return confirm('Are you sure you want delete this category? All posts in this category will be deleted.')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
+                                    </span>
                             {{ Form::close() }}
                             </td>
                         </tr>

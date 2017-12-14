@@ -42,3 +42,9 @@
     box-shadow:0 0 0;
     border-color:#ccc;
 }
+
+.filter{
+    position: relative;
+    left: 10px;
+    top: 36px;
+}

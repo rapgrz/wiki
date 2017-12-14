@@ -9,7 +9,7 @@
                 {{ csrf_field() }}
                 <label for="category">Edit category</label>
                 <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Title" name="name" maxlength="30" value="{{$categories->name}}" required><br><br>
-                <input type="submit" class="btn btn-primary" value="Update category"></form>
+                <input type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want update this category?')" value="Update category"></form>
             <span class="cancel">
             <button class="btn btn-default" onclick="window.location='{{ URL::previous() }}'">Cancel</button>
                 </span>

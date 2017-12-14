@@ -6,21 +6,6 @@
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script>tinymce.init({ selector:'textarea' });</script>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-4">
-                <form action="{{ route('post_search') }}" method="POST">
-                    {{ csrf_field() }}
-                    <div id="imaginary_container">
-                        <div class="input-group stylish-input-group">
-                            <input type="text" class="form-control"  placeholder="Search by post title" name="search">
-                    <span class="input-group-addon">
-                            <button type="submit" class="btn btn-primary btn-xs">Search</button>
-                </form>
-            </div>
-        </div>
-        </span>
-    </div>
-    </div>
     <div class="row">
         <div class="col-md-2">
             <img src="{{URL::asset('images/category_logo.png')}}" height="23" width="23">&nbsp;Categories <br><br>
@@ -42,7 +27,7 @@
                                 <div class="buttons pull-right">
                                     <span class="edit"><a href="{{ route('post_edit',['post_id' => $post->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
                                     {{ Form::open([ 'method'  => 'post', 'route' => [ 'post_delete', $post->id ] ]) }}
-                                    <span class="destroy"><input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                                    <span class="destroy"><input type="image" onclick="return confirm('Are you sure you want delete this post?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                                     {{ Form::close() }}
                                 </div>
                             @endif</h3></div>
@@ -78,13 +63,15 @@
             <div class="col-sm-5">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <strong>Author {{ $comment->user->name }}</strong> <span class="text-muted">commented {{$comment->created_at}}</span>
+                        <strong>{{ $comment->user->name }}</strong> <span class="text-muted">commented {{$comment->created_at}}</span>
+                        @if($comment->user->email == Auth::user()->email)
                         <div class="buttons pull-right">
                             <span class="editComment"><a href="{{ route('editComment',['comment_id' => $comment->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
                             {{ Form::open([ 'method'  => 'post', 'route' => [ 'destroyComment', $comment->id ] ]) }}
-                            <span class="destroyComment"><input type="image" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                            <span class="destroyComment"><input type="image" onclick="return confirm('Are you sure you want delete this comment?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                             {{ Form::close() }}
                         </div>
+                            @endif
                     </div>
                     <div class="panel-body">
                         {!! html_entity_decode($comment->content) !!}

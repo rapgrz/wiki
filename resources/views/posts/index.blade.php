@@ -5,20 +5,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-4">
-                <form action="{{ route('post_search') }}" method="POST">
+            <form action="{{ route('post_search') }}" method="POST">
+            <div class="col-sm-2 col-sm-offset-4">
+        <span class="filter">
+        <select id="searchBy" class="form-control" name="searchBy">
+            <option value="title">Title</option>
+            <option value="content">Content</option>
+        </select>
+             </span>
+            </div>
+            <div class="col-sm-6 col-sm-offset-6">
                     {{ csrf_field() }}
                 <div id="imaginary_container">
                     <div class="input-group stylish-input-group">
-                        <input type="text" class="form-control"  placeholder="Search by post title" name="search">
+                        <input type="text" class="form-control"  placeholder="Search by selected filter" name="search">
                     <span class="input-group-addon">
                             <button type="submit" class="btn btn-primary btn-xs">Search</button>
-                </form>
+                        </form>
                     </div>
                 </div>
                     </span>
             </div>
-        </div>
+    </div>
         <div class="row">
             <div class="col-md-2">
                 <img src="{{URL::asset('images/category_logo.png')}}" height="23" width="23">&nbsp;Categories <br><br>
@@ -36,12 +44,17 @@
             <div class="col-md-10">
                 @foreach($posts as $post)
                     <div class="panel panel-default">
-                        <div class="panel-heading"><h3 class="panel-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="35" width="35"></span> {{ $post->title }}
+                        <div class="panel-heading"><h3 class="panel-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="35" width="35"></span>
+                                <a href="{{ route('postShow', ['post_id' => $post->id]) }}">{{ $post->title }}</a>
                                 @if($post->user->email == Auth::user()->email)
                                     <div class="buttons pull-right">
-                                        <span class="edit"><a href="{{ route('post_edit',['post_id' => $post->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
+                                        <span class="edit">
+                                            <a href="{{ route('post_edit',['post_id' => $post->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a>
+                                        </span>
                                         {{ Form::open([ 'method'  => 'post', 'route' => [ 'post_delete', $post->id ] ]) }}
-                                        <span class="destroy"><input type="image" onclick="return confirm('Are you sure you want delete this post?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                                        <span class="destroy">
+                                            <input type="image" onclick="return confirm('Are you sure you want delete this post?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
+                                        </span>
                                         {{ Form::close() }}
                                     </div>
                                 @endif</h3></div>

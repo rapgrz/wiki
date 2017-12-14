@@ -85,9 +85,9 @@ class PostsController extends Controller
     public function search(Request $request){
         $data = $request->all();
         $search = $data['search'];
+        $filter = $data['searchBy'];
         $categories = Category::all();
-        $posts = PostModel::where('title', 'like', "%$search%")->paginate(10);
-        $count = count($posts);
+        $posts = PostModel::where($filter, 'like', "%$search%")->paginate(10);
 
             return view("posts.index", array(
                 'posts' => $posts
