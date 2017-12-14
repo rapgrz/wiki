@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use App\User;
 
 
 class PostsController extends Controller
@@ -26,7 +27,7 @@ class PostsController extends Controller
 
         $posts = PostModel::orderBy('id', 'created_at')->paginate(10);
         $categories = Category::all();
-        
+
         return view("posts.index", array(
             'posts' => $posts,
             'categories' => $categories
@@ -106,9 +107,11 @@ class PostsController extends Controller
     public function postShow($id){
 
         $post = PostModel::find($id);
+        $user = User::find($id);
        
         return view("posts.show", array(
-           'post' => $post
+           'post' => $post,
+            'user' => $user
         ));
     }
     public function addComment(Request $request, $id){

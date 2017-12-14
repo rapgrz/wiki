@@ -9,7 +9,7 @@
                     <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Category" name="category" maxlength="30" required><br>
 
                     {{ csrf_field() }}
-                    <input type="submit" class="btn btn-primary" value="Create Category">
+                    <input type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to create category by that name?')" value="Create Category">
                 </form>
                 <br><br><br>
                     <label for="title">Manage existing category</label>
@@ -17,13 +17,16 @@
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
+                        @if(Auth::user()->access_level >= 5)
                         <th scope="col">Action</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($categories as $category)
                         <tr>
                             <td>{{$category->name}}</td>
+                            @if(Auth::user()->access_level >= 5)
                             <td>
                                 <span class="edit"><a href="{{ route('category_edit',['category_id' => $category->id ] ) }}">
                                         <img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>&nbsp;
@@ -34,6 +37,7 @@
                                     </span>
                             {{ Form::close() }}
                             </td>
+                            @endif
                         </tr>
                     @endforeach
                             </tbody>

@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-7">
-                <label for="title">Manage existing users</label>
+                <label>Manage existing users</label>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -36,6 +36,35 @@
                     </tbody>
                 </table>
             </div>
+            <div class="col-md-5">
+                <label>Access level meaning</label>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Access level id</th>
+                        <th scope="col">What user can do</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>Can read posts, comment on posts, see categories, use search</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Can create/delete/edit posts witch he made, add categories</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Can manage all posts and all comments</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Can manage users, all posts, all comments</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
         </div>
     </div>
 

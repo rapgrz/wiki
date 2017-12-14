@@ -57,6 +57,7 @@
                                                Posts
                                            </a>
                                        </li>
+                                       @if(Auth::user()->access_level >= 3)
                                        <li class="divider">
 
                                        </li>
@@ -65,11 +66,14 @@
                                                Create post
                                            </a>
                                        </li>
+                                       @endif
+                                       @if(Auth::user()->access_level >= 3)
                                        <li class>
                                            <a href="{{ route('categories')}}">
                                                Categories
                                            </a>
                                        </li>
+                                       @endif
                                        @if(Auth::user()->access_level == 10)
                                        <li class>
                                            <a href="{{ route('users')}}">
