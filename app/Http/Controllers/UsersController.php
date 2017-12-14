@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Faker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\User;
 
 
 class UsersController extends Controller
@@ -25,5 +26,28 @@ class UsersController extends Controller
         return view("users", array(
             'users' => $users
         ));
+    }
+    public function userEdit($id){
+        $user = User::findOrFail($id);
+        return view('user_edit', array(
+            'users' => $user
+        ));
+    }
+
+    public function userUpdate($id){
+        $user = User::find($id);
+        $user->email = Input::get('email');
+        $user->access_level = Input::get('access');
+        $user->save();
+
+        return redirect(route('users'));
+
+    }
+    
+    public function userDelete($id){
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect(route('users'));
     }
 }
