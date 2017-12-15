@@ -42,11 +42,14 @@
                 </div>
         </div>
         <div class="col-sm-10">
+            <div id="msg"></div>
             <h3>Add comment</h3>
-            <form action="{{ route('addComment', ['post_id' => $post->id]) }}" method="POST">
+            <form action="{{ route('addComment', ['post_id' => $post->id]) }}" method="POST" id="addComment">
                 {{ csrf_field() }}
-                <textarea name="content"></textarea><br>
-                <button type="submit" class="btn btn-primary">Add comment</button>
+                <textarea id="content"></textarea><br>
+                <input type="hidden" id="post_id" value="{{$post->id}}">
+                <input type="hidden" id="add_comment_uri" value="{{ route('addComment', ['post_id' => $post->id]) }}">
+                <button type="submit" class="btn btn-primary" id="confirmAdd">Add comment</button>
                         </form>
             <br>
             </div>
@@ -84,3 +87,60 @@
     </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    $("#addComment").on('submit', function (e) {
+        e.preventDefault();
+        tinyMCE.triggerSave();
+        var content = $("textarea#content").val();
+        var id = $("#post_id").val();
+        var uri = $("#add_comment_uri").val();
+
+        console.log(content);
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var req = $.ajax({
+                    method: "POST",
+                    url: uri,
+                    data: { content: content, id: id},
+                    beforeSend: function (data) {
+                        $("#confirmAdd").attr('disabled','disabled');
+                        $("#confirmAdd").val('Please wait...');
+                    }
+                }
+        );
+
+        req.fail(function( data ) {
+
+            var errorsHtml = '<div class="alert alert-danger"><ul>';
+
+            $.each( data.responseJSON.errors.name, function( key, value ) {
+                errorsHtml += '<li>' + value + '</li>';
+            });
+            errorsHtml += '</ul></div>';
+            $( '#msg' ).html( errorsHtml );
+
+            $("#confirmAdd").attr('disabled', false);
+            $("#confirmAdd").val('Add comment');
+        });
+
+        req.done(function( data ) {
+            var content = data.content;
+            var id = data.id;
+
+            $("#msg").html("");
+            $("#msg").html("<div class='alert alert-success'>Comment has been added</div>");
+
+            $("#confirmAdd").attr('disabled', false);
+            $("#confirmAdd").val('Add comment');
+
+        });
+
+    });
+</script>
+@endpush

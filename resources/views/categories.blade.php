@@ -41,11 +41,11 @@
                             @if(Auth::user()->access_level >= 5)
                             <td>
                                 <span class="edit"><a href="{{ route('category_edit',['category_id' => $category->id ] ) }}">
-                                        <img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>&nbsp;
+                                        <img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30" id="editCategory"/></a></span>&nbsp;
                                 {{ Form::close() }}
-                            {{ Form::open([ 'method'  => 'post', 'route' => [ 'category_delete', $category->id ] ]) }}
+                            {{ Form::open([ 'method'  => 'post', 'route' => [ 'category_delete', $category->id ], 'id'=>'id' ]) }}
                                     <span class="destroy">
-                                        <input type="image" onclick="return confirm('Are you sure you want delete this category? All posts in this category will be deleted.')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
+                                        <input type="image" id="deleteCategory" onclick="return confirm('Are you sure you want delete this category? All posts in this category will be deleted.')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
                                     </span>
                             {{ Form::close() }}
                             </td>
@@ -115,6 +115,7 @@
         });
 
     });
+
 </script>
 @endpush
 

@@ -124,7 +124,11 @@ class PostsController extends Controller
         $comment->user_id =  Auth::user()->id;
         $comment->save();
 
-        return redirect()->back();
+        return response()->json([
+            'content' => $comment->content,
+            'post_id' => $comment->post_id,
+            'user_id' => $comment->user_id
+        ]);
     }
     public function destroyComment($id){
         $comment = Comment::findOrFail($id);
