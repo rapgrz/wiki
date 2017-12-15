@@ -36,6 +36,7 @@
                     </tbody>
                 </table>
             </div>
+            <span class="accessBox">
             <div class="col-md-5">
                 <label>Access level meaning</label>
                 <table class="table table-striped">
@@ -65,6 +66,7 @@
                     </tbody>
                 </table>
                 </div>
+                </span>
         </div>
     </div>
 

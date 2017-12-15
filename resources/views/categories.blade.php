@@ -3,17 +3,28 @@
     <link rel="stylesheet" href="{{ URL::asset('css/categories.css') }}" />
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
-                <form action="{{ route('saveCategory') }}" method="POST">
-                    <label for="title">Type category name</label>
-                    <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Category" name="category" maxlength="30" required><br>
 
+            <div id="msg"></div>
+            <div class="col-md-7">
+
+                <form action="{{ route('saveCategory') }}" method="POST" id="create_category_form">
+
+                    <label for="title">Type category name</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Category" name="category" maxlength="30" required><br>
                     {{ csrf_field() }}
-                    <input type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to create category by that name?')" value="Create Category">
+
+                    <input type="submit" class="btn btn-primary" value="Create Category" id="create_cat">
+
                 </form>
+
+
+
                 <br><br><br>
                     <label for="title">Manage existing category</label>
-                <table class="table table-striped">
+
+
+                <table class="table table-striped" id="categories_list">
+
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -22,6 +33,7 @@
                         @endif
                     </tr>
                     </thead>
+
                     <tbody>
                     @foreach($categories as $category)
                         <tr>
@@ -42,7 +54,67 @@
                     @endforeach
                             </tbody>
                     </table>
+
+
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    $("#create_category_form").on('submit', function (e) {
+        e.preventDefault();
+        var name = $("#name").val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var req = $.ajax({
+                    method: "POST",
+                    url: "{{ route('saveCategory') }}",
+                    data: { name: name},
+                    beforeSend: function (data) {
+                        $("#create_cat").attr('disabled','disabled');
+                        $("#create_cat").val('Please wait...');
+                    }
+                }
+            );
+
+        req.fail(function( data ) {
+
+           var errorsHtml = '<div class="alert alert-danger"><ul>';
+
+            $.each( data.responseJSON.errors.name, function( key, value ) {
+                errorsHtml += '<li>' + value + '</li>'; //showing only the first error.
+            });
+            errorsHtml += '</ul></div>';
+            $( '#msg' ).html( errorsHtml );
+
+            $("#create_cat").attr('disabled', false);
+            $("#create_cat").val('Create Category');
+        });
+
+        req.done(function( data ) {
+            var name = data.name;
+            var id = data.id;
+
+            var newRow = "<tr><td>"+name+"</td></tr>";
+
+            $("#categories_list tbody").append(newRow);
+
+            $("#msg").html("");
+            $("#msg").html("<div class='alert alert-success'>Category have been created</div>");
+
+            $("#create_cat").attr('disabled', false);
+            $("#create_cat").val('Create Category');
+
+        });
+
+    });
+</script>
+@endpush
+

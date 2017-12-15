@@ -38,11 +38,20 @@ class CategoryController extends Controller
     public function saveCategory(Request $request){
         $data = $request->all();
 
+        $validatedData = $request->validate([
+            'name' => 'unique:categories|max:255'
+        ]);
+
         $category = new Category();
-        $category->name = $data['category'];
+        $category->name = $data['name'];
         $category->save();
 
-        return redirect(route('categories'));
+        return response()->json([
+            'name' => $category->name,
+            'id' => $category->id
+        ]);
+
+       // return redirect(route('categories'));
     }
 
     public function edit($id){
