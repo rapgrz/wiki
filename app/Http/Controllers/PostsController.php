@@ -44,6 +44,11 @@ class PostsController extends Controller
     public function savePost(Request $request){
         $data = $request->all();
 
+        $validatedData = $request->validate([
+            'content' => 'required|min:20',
+            'title' => 'required|between:5,100'
+        ]);
+
         $post = new PostModel();
         
         $post->content = $data['content'];
@@ -52,7 +57,9 @@ class PostsController extends Controller
         $post->user_id =  Auth::user()->id;
         $post->save();
 
-        return redirect(route('posts'));
+        return response()->json([
+            'content' => $post->content,
+        ]);
     }
 
     public function destroy($id){
@@ -129,11 +136,14 @@ class PostsController extends Controller
         $comment->user_id =  Auth::user()->id;
         $comment->save();
 
+
         return response()->json([
             'content' => $comment->content,
             'post_id' => $comment->post_id,
             'user_id' => $comment->user_id,
-            'comment_id' => $comment->id
+            'user_name' => Auth::user()->name,
+            'comment_id' => $comment->id,
+            'created_at' => $comment->created_at
         ]);
     }
     public function destroyComment($id){

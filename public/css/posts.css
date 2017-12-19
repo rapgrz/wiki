@@ -1,4 +1,5 @@
 
+
     .col-md-10{
         left: 210px;
         max-width: 1000px;
@@ -26,7 +27,8 @@
     .title{
         position: relative;
         align-items: center;
-        right: 4px;
+        right: 5px;
+        top: -2px;
     }
 
     .col-md-2{

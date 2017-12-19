@@ -4,8 +4,7 @@
     <div class="container">
         <div class="row">
 
-            <div id="msg"></div>
-            <div class="col-md-7">
+            <div class="col-md-7 mt-5">
 
                 <form action="{{ route('saveCategory') }}" method="POST" id="create_category_form">
 
@@ -16,8 +15,8 @@
                     <input type="submit" class="btn btn-primary" value="Create Category" id="create_cat">
 
                 </form>
-
-
+                <br>
+                <div id="msg"></div>
 
                 <br><br><br>
                     <label for="title">Manage existing category</label>

@@ -72,8 +72,8 @@
                                     @if($comment->user->email == Auth::user()->email || Auth::user()->access_level >= 5)
                                         <div class="buttons float-right">
                                             <span class="editComment"><a href="{{ route('editComment',['comment_id' => $comment->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
-                                            {{ Form::open([ 'method'  => 'post', 'route' => [ 'destroyComment', $comment->id ] ]) }}
-                                            <span class="destroyComment" id="deleteComment"><input type="image" onclick="return confirm('Are you sure you want delete this comment?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                                            {{ Form::open([ 'id' => 'deleteComment', 'method'  => 'post', 'route' => [ 'destroyComment', $comment->id ] ]) }}
+                                            <span class="destroyComment"><input type="image" id='destroyComment' onclick="return confirm('Are you sure you want delete this comment?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                                             {{ Form::close() }}
                                         </div>
                                     @endif
@@ -144,7 +144,9 @@
             var content = data.content;
             var post_id = data.post_id;
             var user_id = data.user_id;
+            var user_name = data.user_name;
             var comment_id = data.comment_id;
+            var created_at = data.created_at;
 
             var edit_url = '{{ route('posts') }}/edit/comment/'+comment_id;
             var destroy_url = '/wiki/public/post/comment/'+comment_id;
@@ -158,13 +160,15 @@
                     + "<div class='card'>"
                     + "<div class='card-header'>"
                     + "<strong>"
-                    + ""
-                    + "</strong> <span class='text-muted'>commented </span>"
+                    + user_name
+                    + "</strong> <span class='text-muted'>commented&nbsp;"
+                    + created_at
+                    + "</span>"
                     + "@if('sadsadsad' == Auth::user()->email || Auth::user()->access_level >= 5)"
                     + "<div class='buttons float-right'>"
                     + "<span class='editComment'><a href='"+edit_url+"'><img src='{{URL::asset('images/edit_logo.png')}}'  height='30' width='30'/></a></span>"
                     + "<form method='post' action='"+destroy_url+"'> <input type='hidden' name='_token' value='{{ csrf_token() }}'>"
-                    + "<span class='destroyComment'><input type='image' onclick='return confirm('Are you sure you want delete this comment?')' src='{{URL::asset('images/trash_logo.png')}}' height='20' width='20'/></span>"
+                    + "<span class='destroyComment'><input type='image' id='destroyComment' onclick='return confirm('Are you sure you want delete this comment?')' src='{{URL::asset('images/trash_logo.png')}}' height='20' width='20'/></span>"
                     + "</form>"
                     + "</div>"
                     + "@endif"
@@ -187,25 +191,27 @@
         });
 
     });
-    $("#deleteComment").on('click','img', function (e) {
-        e.preventDefault();
-        var id = $("#comment_id").val();
-        var url = $("#delete_comment_url").val();
+    $("#destroyComment").on('click', function (e) {
+        $("#deleteComment").on('submit', function (d) {
+            e.preventDefault();
+            var id = $("#comment_id").val();
+            var url = $("#delete_comment_url").val();
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        var req = $.ajax({
-                    method: "POST",
-                    url: url,
-                    data: {id: id},
-
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('comment_id')
                 }
-        );
-        console.log(id);
+            });
+
+            var req = $.ajax({
+                        method: "POST",
+                        url: url,
+                        data: {id: id},
+
+                    }
+            );
+            console.log(id);
+        });
     });
 
 </script>

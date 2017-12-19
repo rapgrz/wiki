@@ -31,10 +31,10 @@
                 <ul class="navbar-nav mr-auto justify-content-end">
                     <!-- Authentication Links -->
                     @guest
-                    <li class="nav-item my-2" >
+                    <li class="nav-item my-2 flex-row-reverse">
                         <a class="nav-link" href="{{ route('login') }}">Login</a>
                     </li>
-                    <li class="nav-item my-2">
+                    <li class="nav-item my-2 flex-row-reverse">
                         <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
                     @else

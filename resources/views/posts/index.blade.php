@@ -35,7 +35,7 @@
 
                     </div>
                 </div>
-                    </span>
+
             </div>
     </div>
         <div class="row">
@@ -55,7 +55,7 @@
             <div class="col-md-10">
                 @foreach($posts as $post)
                     <div class="card">
-                        <div class="card-header"><h3 class="card-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="35" width="35"></span>
+                        <div class="card-header"><h3 class="card-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="40" width="40"></span>
                                 <a href="{{ route('postShow', ['post_id' => $post->id]) }}">{{ $post->title }}</a>
                                 @if($post->user->email == Auth::user()->email || Auth::user()->access_level >= 5)
                                     <div class="buttons float-right">
@@ -86,5 +86,5 @@
             </div>
             </div>
             </div>
-    </div>
+
 @endsection

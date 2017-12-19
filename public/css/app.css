@@ -6046,6 +6046,9 @@ a.bg-dark:focus,
 a.bg-dark:hover {
   background-color: #1d2124 !important;
 }
+.body{
+  background-color: #5bff3d;
+}
 
 .bg-white {
   background-color: #fff !important;
