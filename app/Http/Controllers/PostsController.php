@@ -105,17 +105,23 @@ class PostsController extends Controller
         ));
     }
     public function postShow($id){
-
+        $comment = Comment::orderBy('id', 'created_at')->paginate(3);
         $post = PostModel::find($id);
         $user = User::find($id);
        
         return view("posts.show", array(
            'post' => $post,
-            'user' => $user
+            'user' => $user,
+            'comment' => $comment
         ));
     }
     public function addComment(Request $request, $id){
         $data = $request->all();
+
+        $validatedData = $request->validate([
+            'content' => 'required|between:5,1000'
+        ]);
+
         $comment = new Comment();
 
         $comment->content = $data['content'];

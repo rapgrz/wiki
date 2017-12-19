@@ -56,6 +56,7 @@
             </div>
             <div class="col-sm-10">
                 <h3>Post comments</h3>
+                <div id="new_comment" class="row mb-3"></div>
                 @isset($post->comment)
                 @foreach($post->comment as $comment)
                     <div class="row">
@@ -64,7 +65,7 @@
                                 <img class="img-fluid user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
                             </div>
                         </div>
-                        <div class="col-sm-5">
+                        <div class="col-sm-11">
                             <div class="card">
                                 <div class="card-header">
                                     <strong>{{ $comment->user->name }}</strong> <span class="text-muted">commented {{$comment->created_at}}</span>
@@ -72,7 +73,7 @@
                                         <div class="buttons float-right">
                                             <span class="editComment"><a href="{{ route('editComment',['comment_id' => $comment->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
                                             {{ Form::open([ 'method'  => 'post', 'route' => [ 'destroyComment', $comment->id ] ]) }}
-                                            <span class="destroyComment"><input type="image" onclick="return confirm('Are you sure you want delete this comment?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                                            <span class="destroyComment" id="deleteComment"><input type="image" onclick="return confirm('Are you sure you want delete this comment?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
                                             {{ Form::close() }}
                                         </div>
                                     @endif
@@ -96,6 +97,7 @@
 <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
 <script>tinymce.init({ selector:'textarea' });</script>
 <script>
+
     $("#addComment").on('submit', function (e) {
         e.preventDefault();
         tinyMCE.triggerSave();
@@ -128,7 +130,7 @@
 
             var errorsHtml = '<div class="alert alert-danger"><ul>';
 
-            $.each( data.responseJSON.errors.name, function( key, value ) {
+            $.each( data.responseJSON.errors.content, function( key, value ) {
                 errorsHtml += '<li>' + value + '</li>';
             });
             errorsHtml += '</ul></div>';
@@ -149,10 +151,10 @@
 
             var newComment = "<div class='col-sm-1'>"
                     +"<div class='thumbnail'>"
-                    + "<img class='img-responsive user-photo' src='https://ssl.gstatic.com/accounts/ui/avatar_2x.png'>"
+                    + "<img class='img-fluid user-photo' src='https://ssl.gstatic.com/accounts/ui/avatar_2x.png'>"
                     + "</div>"
                     + "</div>"
-                    + "<div class='col-sm-5'>"
+                    + "<div class='col-sm-11'>"
                     + "<div class='card'>"
                     + "<div class='card-header'>"
                     + "<strong>"
@@ -171,7 +173,8 @@
                     + content
                     + "</div>"
                     + "</div>"
-                    + "</div>";
+                    + "</div>"
+                    + "</br>";
 
             $("#new_comment").prepend(newComment);
 
