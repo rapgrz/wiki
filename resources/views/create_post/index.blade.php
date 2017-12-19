@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @push('css')
 @endpush
-
 @section('content')
+    @if(Auth::user()->access_level >= 3)
     <div class="container">
         <div id="msg" class="mt-5"></div><br>
         <div class="row">
@@ -28,6 +28,9 @@
             </div>
         </div>
 </div>
+    @else
+    You have no permission to see this
+    @endif
 @endsection
 @push('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

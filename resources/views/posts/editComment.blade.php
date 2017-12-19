@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+    @if($comment->user->email == Auth::user()->email || Auth::user()->access_level >= 10)
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
     <script>tinymce.init({ selector:'textarea' });</script>
     <div class="container">
@@ -18,4 +18,7 @@
             </div>
         </div>
     </div>
+    @else
+    You have no permission to see this
+    @endif
 @endsection

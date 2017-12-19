@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+    @if(Auth::user()->access_level >= 3)
     <link rel="stylesheet" href="{{ URL::asset('css/categories.css') }}" />
     <div class="container">
         <div class="row">
@@ -58,6 +59,9 @@
             </div>
         </div>
     </div>
+    @else
+    You have no permission to see this
+    @endif
 @endsection
 
 @push('scripts')
