@@ -1,50 +1,52 @@
-.col-md-10{
-    left: 300px;
-    max-width: 1000px;
-    margin:10px auto;
-    -moz-border-radius-topleft: 10px 40px;
-}
 
-.panel{
-    word-break: break-all;
-}
+    .col-md-10{
+        left: 210px;
+        max-width: 1000px;
+        margin:10px auto;
+        -moz-border-radius-topleft: 10px 40px;
+    }
 
-.edit{
-    position: absolute;
-    align-items: center;
-    right: 80px;
-}
+    .card{
+        word-break: break-all;
+    }
 
-.destroy{
-    position: relative;
-    align-items: center;
-    right: 10px;
-    top: 4px;
-}
+    .edit{
+        position: absolute;
+        align-items: center;
+        right: 80px;
+    }
 
-.title{
-    position: relative;
-    align-items: center;
-    right: 4px;
-}
+    .destroy{
+        position: relative;
+        align-items: center;
+        right: 10px;
+        top: 4px;
+    }
 
-.col-md-2{
-    position: absolute;
-    left: 200px;
-    width: 350px;
-}
+    .title{
+        position: relative;
+        align-items: center;
+        right: 4px;
+    }
 
-.stylish-input-group .input-group-addon{
-    background: white !important;
-}
-.stylish-input-group .form-control{
-    border-right:0;
-    box-shadow:0 0 0;
-    border-color:#ccc;
-}
+    .col-md-2{
+        position: absolute;
+        left: 200px;
+        width: 350px;
+    }
 
-.filter{
-    position: relative;
-    left: 10px;
-    top: 36px;
-}
+    .stylish-input-group .input-group-addon{
+        background: white !important;
+    }
+    .stylish-input-group .form-control{
+        border-right:0;
+        box-shadow:0 0 0;
+        border-color:#ccc;
+    }
+
+    .filter{
+        position: relative;
+        left: 250px;
+        width: 200px;
+        top: 36px;
+    }

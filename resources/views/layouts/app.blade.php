@@ -9,110 +9,81 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ 'Wiki' }} {{exec('git describe --tags --abbrev=0')}}</title>
+    <!-- Latest compiled and minified CSS -->
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('css')
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" >
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/login') }}">
-                        {{ config('app.name', 'Wiki') }}
-                    </a>
-                </div>
+            <a class="navbar-brand"  href="{{ url('/login') }}">
+                <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+                Wiki
+            </a>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                               <li class="dropdown">
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                       Wiki <span class="caret"></span>
-                                   </a>
+              <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav mr-auto justify-content-end">
+                    <!-- Authentication Links -->
+                    @guest
+                    <li class="nav-item my-2" >
+                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item my-2">
+                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    </li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Wiki <span class="caret"></span>
+                            </a>
 
-                                   <ul class="dropdown-menu">
-                                       <li>
-                                           <a href="{{ route('posts') }}">
-                                               Posts
-                                           </a>
-                                       </li>
-                                       @if(Auth::user()->access_level >= 3)
-                                       <li class="divider">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('posts')}}">Posts</a>
+                                @if(Auth::user()->access_level >= 3)
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{route('create_post')}}">Create post</a>
+                                @endif
+                                @if(Auth::user()->access_level >= 3)
+                                <a class="dropdown-item" href="{{route('categories')}}">Categories</a>
+                                @endif
+                                @if(Auth::user()->access_level == 10)
+                                <a class="dropdown-item" href="{{route('users')}}">Users</a>
+                                @endif
+                            </div>
+                    </li>
 
-                                       </li>
-                                       <li>
-                                           <a href="{{ route('create_post') }}">
-                                               Create post
-                                           </a>
-                                       </li>
-                                       @endif
-                                       @if(Auth::user()->access_level >= 3)
-                                       <li class>
-                                           <a href="{{ route('categories')}}">
-                                               Categories
-                                           </a>
-                                       </li>
-                                       @endif
-                                       @if(Auth::user()->access_level == 10)
-                                       <li class>
-                                           <a href="{{ route('users')}}">
-                                                Users
-                                           </a>
-                                       </li>
-                                   @endif
-                                   </ul>
-                               </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                     <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{route('logout')}}"
+                               onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                                Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                            </div>
+                    </li>
                         @endguest
                     </ul>
-                </div>
-            </div>
-        </nav>
+            </nav>
 
+
+    <div class="container">
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     @stack('scripts')
+
 </body>
 </html>

@@ -1,6 +1,8 @@
 @extends('layouts.app')
+@push('css')
+<link rel="stylesheet" href="{{ URL::asset('css/categories.css') }}" />
+@endpush
 @section('content')
-    <link rel="stylesheet" href="{{ URL::asset('css/categories.css') }}" />
 @if(Auth::user()->access_level == 10)
     <div class="container">
         <div class="row">

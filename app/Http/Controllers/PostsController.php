@@ -116,7 +116,6 @@ class PostsController extends Controller
     }
     public function addComment(Request $request, $id){
         $data = $request->all();
-
         $comment = new Comment();
 
         $comment->content = $data['content'];
@@ -127,7 +126,8 @@ class PostsController extends Controller
         return response()->json([
             'content' => $comment->content,
             'post_id' => $comment->post_id,
-            'user_id' => $comment->user_id
+            'user_id' => $comment->user_id,
+            'comment_id' => $comment->id
         ]);
     }
     public function destroyComment($id){

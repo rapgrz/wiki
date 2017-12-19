@@ -1,14 +1,14 @@
 .thumbnail {
     padding:0px;
 }
-.panel {
+.card {
     position:relative;
 }
-.panel>.panel-heading:after,.panel>.panel-heading:before{
+.card>.card-header:after,.card>.card-header:before{
     position:absolute;
     top:11px;left:-16px;
     right:100%;
-    width:0;
+    width: 10px;
     height:0;
     display:block;
     content:" ";
@@ -16,13 +16,13 @@
     border-style:solid solid outset;
     pointer-events:none;
 }
-.panel>.panel-heading:after{
+.card>.card-header:after{
     border-width:7px;
     border-right-color:#f7f7f7;
     margin-top:1px;
     margin-left:2px;
 }
-.panel>.panel-heading:before{
+.card>.card-header:before{
     border-right-color:#ddd;
     border-width:8px;
 }
@@ -31,7 +31,7 @@
 }
 
 .col-sm-5{
-    width: 850px;
+    width: 500px;
 
 }
 .editComment{
