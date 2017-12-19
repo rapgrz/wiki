@@ -9,19 +9,21 @@
     <span class="filter">
     <div class="row mt-5 mb-5">
         <div class="col"></div>
-        <div class="col-6">
+        <div class="form-row">
         <form action="{{ route('post_search') }}" method="POST" class="form-inline">
+            <div class="col">
             <select id="searchBy" class="form-control" name="searchBy">
                 <option value="title">Title</option>
                 <option value="content">Content</option>
             </select>
-
+            </div>
 
             {{ csrf_field() }}
-
+            <div class="col">
             <input type="text" class="form-control"  placeholder="Search by selected filter" name="search">
-
-            <button type="submit" class="btn btn-primary btn-xs">Search</button></span>
+            </div>
+            <div class="col">
+            <button type="submit" class="btn btn-primary btn">Search</button></span></div>
             </form>
 
         </div>

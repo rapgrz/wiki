@@ -104,13 +104,21 @@
         req.done(function( data ) {
             var name = data.name;
             var id = data.id;
+            var edit_url = '/wiki/public/categories/edit/'+id;
+            var destroy_url = '/wiki/public/categories/delete/'+id;
 
-            var newRow = "<tr><td>"+name+"</td></tr>";
+            var newRow = "<tr><td>"+name+"</td>"
+                    + "<td>"
+                    + "<span class='edit'><a href='"+edit_url+"'><img src='{{URL::asset('images/edit_logo.png')}}'  height='30' width='30'/></a></span>"
+                    + "<form method='post' action='"+destroy_url+"'> <input type='hidden' name='_token' value='{{ csrf_token() }}'>"
+                    + "<span class='destroy'><input type='image' id='destroyComment' onclick='return confirm('Are you sure you want delete this comment?')' src='{{URL::asset('images/trash_logo.png')}}' height='20' width='20'/></span>"
+                    + "</form>"
+                    + "</tr></td>";
 
             $("#categories_list tbody").append(newRow);
-
+            $("#name").val("");
             $("#msg").html("");
-            $("#msg").html("<div class='alert alert-success'>Category have been created</div>");
+            $("#msg").html("<div class='alert alert-success'>Category has been created</div>");
 
             $("#create_cat").attr('disabled', false);
             $("#create_cat").val('Create Category');
