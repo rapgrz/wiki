@@ -18,7 +18,6 @@
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select><br>
-                    <input type="hidden" id="category_id" value="{{$category->id}}">
                     <input type="hidden" id="add_post_uri" value="{{ route('save_post')}}">
                     {{ csrf_field() }}
                     <textarea name="content" id="post_content"></textarea><br>
@@ -42,7 +41,7 @@
         tinyMCE.triggerSave();
         var content = $("textarea#post_content").val();
         var title = $("#title").val();
-        var category_id = $("#category_id").val();
+        var category_id = $("#category option:selected").val();
         var uri = $("#add_post_uri").val();
 
 
@@ -81,7 +80,6 @@
     req.done(function( data ) {
         tinyMCE.activeEditor.setContent('');
     $("#title").val("");
-    $("#category_id").html("1");
     $("#msg").html("");
     $("#msg").html("<div class='alert alert-success'>Your post has been added</div>");
 
