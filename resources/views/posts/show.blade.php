@@ -94,8 +94,20 @@
 @endsection
 @push('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea' });</script>
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=re7zhthqsbfs0nmulqlphm57zxh66y0dnhdlstrjxrlnkoiz"></script>
+<script>tinymce.init({
+        selector:'textarea',
+        height: 150,
+        plugins: [
+            "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+            "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+    });
+</script>
 <script>
 
     $("#addComment").on('submit', function (e) {
@@ -146,11 +158,14 @@
             var user_id = data.user_id;
             var user_name = data.user_name;
             var comment_id = data.comment_id;
-            var created_at = data.created_at;
-
+            var created_at_raw = data.created_at.date;
+            var myarr = created_at_raw.split(" ");
+            var created_at = myarr[0]+" "+myarr[1].substring(0, 8);
+            tinyMCE.activeEditor.setContent('');
             var edit_url = '{{ route('posts') }}/edit/comment/'+comment_id;
             var destroy_url = '/wiki/public/post/comment/'+comment_id;
 
+            console.log(created_at);
             var newComment = "<div class='col-sm-1'>"
                     +"<div class='thumbnail'>"
                     + "<img class='img-fluid user-photo' src='https://ssl.gstatic.com/accounts/ui/avatar_2x.png'>"
@@ -167,8 +182,8 @@
                     + "@if('sadsadsad' == Auth::user()->email || Auth::user()->access_level >= 5)"
                     + "<div class='buttons float-right'>"
                     + "<span class='editComment'><a href='"+edit_url+"'><img src='{{URL::asset('images/edit_logo.png')}}'  height='30' width='30'/></a></span>"
-                    + "<form method='post' action='"+destroy_url+"'> <input type='hidden' name='_token' value='{{ csrf_token() }}'>"
-                    + "<span class='destroyComment'><input type='image' id='destroyComment' onclick='return confirm('Are you sure you want delete this comment?')' src='{{URL::asset('images/trash_logo.png')}}' height='20' width='20'/></span>"
+                    + "<form method='post' action='"+destroy_url+"' > <input type='hidden' name='_token' value='{{ csrf_token() }}'>"
+                    + "<span class='destroyComment'><input type='image' id='destroyNewComment' src='{{URL::asset('images/trash_logo.png')}}' height='20' width='20'/></span>"
                     + "</form>"
                     + "</div>"
                     + "@endif"
@@ -191,9 +206,10 @@
         });
 
     });
-    $("#destroyComment").on('click', function (e) {
-        $("#deleteComment").on('submit', function (d) {
+    $("#destroyNewComment").click(function (e) {
+        console.log("asdsadasd");
             e.preventDefault();
+
             var id = $("#comment_id").val();
             var url = $("#delete_comment_url").val();
 
@@ -211,7 +227,7 @@
                     }
             );
             console.log(id);
-        });
+
     });
 
 </script>

@@ -13,7 +13,8 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\User;
-
+use App\Files;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -43,6 +44,8 @@ class PostsController extends Controller
 
     public function savePost(Request $request){
         $data = $request->all();
+        //$fileDir = $request->file($data['fileName'])->store('docs', $data['fileName']);
+        //$path = Storage::putFile('docs', $request->file($data['file']));
 
         $validatedData = $request->validate([
             'content' => 'required|min:20',
@@ -50,12 +53,18 @@ class PostsController extends Controller
         ]);
 
         $post = new PostModel();
+        //$file = new Files();
+
+        //$file->name = $data['file']->getClientOriginalName();
+        //$file->path = $data['file']->getRealPath();
         
         $post->content = $data['content'];
         $post->title = $data['title'];
         $post->category_id = $data['category_id'];
         $post->user_id =  Auth::user()->id;
+       // $file->post_id = $post->id;
         $post->save();
+        //$file->save();
 
         return response()->json([
             'content' => $post->content,
@@ -81,6 +90,7 @@ class PostsController extends Controller
 
     public function update($id){
         $post = PostModel::find($id);
+        
         $post->title = Input::get('title');
         $post->content = Input::get('content');
         $post->category_id = Input::get('category_id');
@@ -126,7 +136,7 @@ class PostsController extends Controller
         $data = $request->all();
 
         $validatedData = $request->validate([
-            'content' => 'required|between:5,1000'
+            'content' => 'required|between:5,10000'
         ]);
 
         $comment = new Comment();

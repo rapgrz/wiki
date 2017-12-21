@@ -41,3 +41,4 @@ Route::post('/users/delete/{user_id}', 'UsersController@userDelete')->name('user
 Route::get('/users/edit/{user_id}', 'UsersController@userEdit')->name('userEdit');
 Route::post('/users/update/{user_id}', 'UsersController@userUpdate')->name('userUpdate');
 
+

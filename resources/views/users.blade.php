@@ -4,7 +4,7 @@
 @endpush
 @section('content')
 @if(Auth::user()->access_level == 10)
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
             <div class="col-md-7">
                 <label>Manage existing users</label>

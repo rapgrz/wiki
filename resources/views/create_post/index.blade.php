@@ -7,24 +7,28 @@
         <div id="msg" class="mt-5"></div><br>
         <div class="row">
             <div class="col-md-7">
-                <form action="{{ route('save_post') }}" method="POST" id="addPost">
+                <form action="{{ route('save_post') }}" method="POST" id="addPost" enctype="multipart/form-data">
                     <label for="title">Type your post title</label>
                     <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Title" name="title" maxlength="70" required><br>
                     <label for="category">Choose category</label>
-
+                    <div class="input-group">
+                        <span class="input-group-addon">Choose...</span>
                     <select id="category" class="form-control" name="category_id" required>
-                        <option selected disabled>Choose...</option>
                         @foreach($categories as $category):
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
-                    </select><br>
+                    </select></div><br>
+                    <label for="file">Upload file</label><br>
+                    <label class="custom-file">
+                        <input type="file" id="file" class="custom-file-input col-md-12 multiple">
+                        <span class="custom-file-control"></span>
+                    </label><br><br>
                     <input type="hidden" id="add_post_uri" value="{{ route('save_post')}}">
                     {{ csrf_field() }}
                     <textarea name="content" id="post_content"></textarea><br>
                     <input type="submit" class="btn btn-primary" value="Create Post" id="createPost">
                 </form>
-
-            </div>
+                </div>
         </div>
 </div>
     @else
@@ -33,9 +37,22 @@
 @endsection
 @push('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-<script>tinymce.init({ selector:'textarea' });</script>
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=re7zhthqsbfs0nmulqlphm57zxh66y0dnhdlstrjxrlnkoiz"></script>
+<script>tinymce.init({
+        selector:'textarea',
+        height: 150,
+        plugins: [
+            "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+            "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+        ],
+        toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+        toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+        toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+    });
+</script>
 <script>
+
     $("#addPost").on('submit', function (e) {
         e.preventDefault();
         tinyMCE.triggerSave();
