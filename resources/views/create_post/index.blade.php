@@ -6,7 +6,7 @@
     <div class="container">
         <div id="msg" class="mt-5"></div><br>
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <form action="{{ route('save_post') }}" method="POST" id="addPost" enctype="multipart/form-data">
                     <label for="title">Type your post title</label>
                     <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Title" name="title" maxlength="70" required><br>
@@ -20,7 +20,7 @@
                     </select></div><br>
                     <label for="file">Upload file</label><br>
                     <label class="custom-file">
-                        <input type="file" id="file" class="custom-file-input col-md-12 multiple">
+                        <input type="file" id="file" class="custom-file-input multiple">
                         <span class="custom-file-control"></span>
                     </label><br><br>
                     <input type="hidden" id="add_post_uri" value="{{ route('save_post')}}">

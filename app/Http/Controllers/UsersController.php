@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Faker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Pagination\Paginator;
 use App\User;
 
 
@@ -20,8 +21,7 @@ class UsersController extends Controller
     }
     //
     public function index(){
-        $users = User::all();
-
+        $users = User::orderBy('id', 'created_at')->paginate(20);
 
         return view("users", array(
             'users' => $users
