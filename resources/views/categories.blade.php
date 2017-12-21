@@ -54,7 +54,7 @@
                     @endforeach
                             </tbody>
                     </table>
-
+                {{ $categories->links('') }}
 
             </div>
         </div>
@@ -115,7 +115,7 @@
                     + "</form>"
                     + "</tr></td>";
 
-            $("#categories_list tbody").append(newRow);
+            $("#categories_list tbody").prepend(newRow);
             $("#name").val("");
             $("#msg").html("");
             $("#msg").html("<div class='alert alert-success'>Category has been created</div>");

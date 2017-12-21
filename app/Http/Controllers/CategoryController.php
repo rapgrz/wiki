@@ -21,7 +21,7 @@ class CategoryController extends Controller
     //
     public function index(){
         $posts = PostModel::all();
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'created_at')->paginate(10);
 
 
         return view("categories", array(

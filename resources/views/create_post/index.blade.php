@@ -20,7 +20,7 @@
                     </select></div><br>
                     <label for="file">Upload file</label><br>
                     <label class="custom-file">
-                        <input type="file" id="file" class="custom-file-input multiple">
+                        <input type="file" id="file" name="file" class="custom-file-input multiple">
                         <span class="custom-file-control"></span>
                     </label><br><br>
                     <input type="hidden" id="add_post_uri" value="{{ route('save_post')}}">
@@ -53,7 +53,7 @@
 </script>
 <script>
 
-    $("#addPost").on('submit', function (e) {
+   /* $("#addPost").on('submit', function (e) {
         e.preventDefault();
         tinyMCE.triggerSave();
         var content = $("textarea#post_content").val();
@@ -105,7 +105,7 @@
 
 });
 
-});
+});*/
 
 </script>
 @endpush

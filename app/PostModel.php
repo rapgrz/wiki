@@ -29,5 +29,8 @@ class PostModel extends Model
     {
         return $this->hasMany('App\Comment', 'post_id');
     }
-    
+    public function files()
+    {
+        return $this->hasMany('App\Files', 'post_id');
+    }
 }

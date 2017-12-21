@@ -43,6 +43,12 @@
                 </div>
             </div>
             <div class="col-sm-10">
+                <strong>Attached files</strong><br>
+                @foreach($post->files as $file)
+                    <a href="http://localhost/wiki/storage/app/{{$file->path}}" target="_blank" download><img src="{{URL::asset('images/folder_download.png')}}" height="40" width="40">&nbsp; {{ $file->name }}</a>
+                    @endforeach
+            </div><br><br>
+            <div class="col-sm-10">
                 <div id="msg"></div>
                 <h3>Add comment</h3>
                 <form action="{{ route('addComment', ['post_id' => $post->id]) }}" method="POST" id="addComment">
@@ -54,7 +60,7 @@
                 </form>
                 <br>
             </div>
-            <div class="col-sm-10">
+                <div class="col-sm-10">
                 <h3>Post comments</h3>
                 <div id="new_comment" class="row mb-3"></div>
                 @isset($post->comment)
