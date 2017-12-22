@@ -20,7 +20,7 @@
                     </select></div><br>
                     <label for="file">Upload file</label><br>
                     <label class="custom-file">
-                        <input type="file" id="file" name="file" class="custom-file-input multiple">
+                        <input type="file" id="file" name="file" class="custom-file-input">
                         <span class="custom-file-control"></span>
                     </label><br><br>
                     <input type="hidden" id="add_post_uri" value="{{ route('save_post')}}">
