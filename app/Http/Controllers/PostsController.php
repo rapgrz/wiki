@@ -124,12 +124,14 @@ class PostsController extends Controller
     public function postShow($id){
         $comment = Comment::orderBy('id', 'created_at')->paginate(3);
         $post = PostModel::find($id);
+        $fileCheck = Files::where('post_id', '=', $id)->count();
         $user = User::find($id);
        
         return view("posts.show", array(
            'post' => $post,
             'user' => $user,
-            'comment' => $comment
+            'comment' => $comment,
+            'fileCheck' => $fileCheck
         ));
     }
     public function addComment(Request $request, $id){

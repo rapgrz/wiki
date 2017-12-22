@@ -38,7 +38,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <hr><button class="btn btn-primary float-right"><i class="glyphicon glyphicon-pencil"></i> Edit</button>
+                                <hr>
+                                <form action="{{ route('userEdit',['user_id' => $user->id ]) }}">
+                                    <input type="submit" class="btn btn-primary float-right" value="Edit" />
+                                </form>
                             </div>
                         </div>
                     </div>

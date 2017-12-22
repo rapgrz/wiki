@@ -42,12 +42,14 @@
                     </div>
                 </div>
             </div>
+            @if($fileCheck > 0)
             <div class="col-sm-10">
                 <strong>Attached files</strong><br>
                 @foreach($post->files as $file)
                     <a href="http://localhost/wiki/storage/app/{{$file->path}}" target="_blank" download><img src="{{URL::asset('images/folder_download.png')}}" height="40" width="40">&nbsp; {{ $file->name }}</a>
                     @endforeach
             </div><br><br>
+            @endif
             <div class="col-sm-10">
                 <div id="msg"></div>
                 <h3>Add comment</h3>
