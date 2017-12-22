@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Comment;
 use App\Post;
 use App\PostModel;
 use Illuminate\Http\Request;
@@ -25,6 +26,17 @@ class UsersController extends Controller
 
         return view("users", array(
             'users' => $users
+        ));
+    }
+    public function myInfo($id){
+        $user = User::find($id);
+        $posts = PostModel::where('user_id', '=', $id);
+        $comments = Comment::where('user_id', '=', $id);
+
+        return view("my_info", array(
+                'user' => $user,
+                'posts' => $posts,
+                'comments' => $comments
         ));
     }
     public function userEdit($id){
