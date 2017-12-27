@@ -15,9 +15,11 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4 text-center">
-                                <img class="img-circle avatar avatar-original" style="-webkit-user-select:none;
-              display:block; margin:auto;" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"><br>
-                                <button class="btn btn-default disabled">Change logo</button>
+                                <img class="rounded-circle avatar avatar-original" style="-webkit-user-select:none;
+              display:block; margin:auto;" src="http://localhost/wiki/storage/app/{{$user->avatar_path}}" width="250" height="250"><br>
+                                <form action="{{ route('uploadAvatar',['user_id' => $user->id ]) }}">
+                                <button class="btn btn-default">Change logo</button>
+                                    </form>
                             </div>
                             <div class="col-md-8">
                                 <div class="row">

@@ -10,6 +10,8 @@
                     <h4>{{$user->name}}</h4>
                     <label for="email">Email</label>
                     <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="email" maxlength="50" value="{{$user->email}}" required><br>
+                    <label for="name">Username</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter username" value="{{$user->name}}" required><br>
                     @if($user->access_level == 10)
                     <label for="access">Access level</label>
                     <select id="access" class="form-control" name="access" required>

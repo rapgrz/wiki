@@ -70,7 +70,7 @@
                     <div class="row">
                         <div class="col-sm-1">
                             <div class="thumbnail">
-                                <img class="img-fluid user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                                <img class="img-fluid user-photo" src="http://localhost/wiki/storage/app/{{$comment->user->avatar_path}}">
                             </div>
                         </div>
                         <div class="col-sm-11">

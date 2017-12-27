@@ -40,5 +40,7 @@ Route::get('/users', 'UsersController@index')->name('users');
 Route::post('/users/delete/{user_id}', 'UsersController@userDelete')->name('userDelete');
 Route::get('/users/edit/{user_id}', 'UsersController@userEdit')->name('userEdit');
 Route::post('/users/update/{user_id}', 'UsersController@userUpdate')->name('userUpdate');
-Route::get('/users/profile/{user_id}', 'UsersController@myInfo')->name('profile');
+Route::get('/users/profile/{user_id}', 'UsersController@profile')->name('profile');
+Route::get('/users/upload_avatar/{user_id}', 'UsersController@uploadAvatar')->name('uploadAvatar');
+Route::post('/users/saveAvatar', 'UsersController@saveAvatar')->name('saveAvatar');
 

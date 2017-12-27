@@ -28,7 +28,7 @@ class UsersController extends Controller
             'users' => $users
         ));
     }
-    public function myInfo($id){
+    public function profile($id){
         $user = User::find($id);
         $posts = PostModel::where('user_id', '=', $id);
         $comments = Comment::where('user_id', '=', $id);
@@ -38,6 +38,30 @@ class UsersController extends Controller
                 'posts' => $posts,
                 'comments' => $comments
         ));
+    }
+    public function uploadAvatar($id){
+        $user = User::findOrFail($id);
+        return view('upload_avatar', array(
+            'user' => $user
+        ));
+    }
+    public function saveAvatar(Request $request){
+        $data = $request->all();
+        $user = Auth::user();
+        $validatedData = $request->validate([
+            'avatar' => 'required|mimes:jpeg,bmp,png,gif'
+        ]);
+
+        $avatar = $request->file('avatar');
+        $avatar_name = $avatar->getClientOriginalName();
+        $avatar_path = $avatar->store('avatars');
+
+        $user->avatar = $avatar_name;
+        $user->avatar_path = $avatar_path;
+
+        $user->save();
+        return redirect(route('profile', ['user_id' => $user->id]));
+
     }
     public function userEdit($id){
         $user = User::findOrFail($id);
@@ -50,6 +74,7 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->email = Input::get('email');
         $user->access_level = Input::get('access');
+        $user->name = Input::get('name');
         $user->save();
 
         return redirect(route('users'));
