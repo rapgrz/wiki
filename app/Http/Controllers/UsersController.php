@@ -42,7 +42,7 @@ class UsersController extends Controller
     public function userEdit($id){
         $user = User::findOrFail($id);
         return view('user_edit', array(
-            'users' => $user
+            'user' => $user
         ));
     }
 

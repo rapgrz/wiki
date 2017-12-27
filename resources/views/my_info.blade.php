@@ -5,9 +5,9 @@
 @endpush
 @section('content')
     @if($user->email == Auth::user()->email || Auth::user()->access_level >= 10)
-    <div class="container mt-5">
+    <div class="container mt-5 ml-5">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-9 ml-5">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -17,7 +17,7 @@
                             <div class="col-md-4 text-center">
                                 <img class="img-circle avatar avatar-original" style="-webkit-user-select:none;
               display:block; margin:auto;" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png"><br>
-                                <button class="btn btn-default">Change logo</button>
+                                <button class="btn btn-default disabled">Change logo</button>
                             </div>
                             <div class="col-md-8">
                                 <div class="row">

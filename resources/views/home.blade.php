@@ -3,8 +3,8 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="card">
+        <div class="col-md-8 col-md-offset-2 mt-5 ml-5">
+            <div class="card ml-5">
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
