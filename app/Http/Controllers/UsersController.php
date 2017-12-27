@@ -33,7 +33,7 @@ class UsersController extends Controller
         $posts = PostModel::where('user_id', '=', $id);
         $comments = Comment::where('user_id', '=', $id);
 
-        return view("my_info", array(
+        return view("profile", array(
                 'user' => $user,
                 'posts' => $posts,
                 'comments' => $comments

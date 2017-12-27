@@ -40,5 +40,5 @@ Route::get('/users', 'UsersController@index')->name('users');
 Route::post('/users/delete/{user_id}', 'UsersController@userDelete')->name('userDelete');
 Route::get('/users/edit/{user_id}', 'UsersController@userEdit')->name('userEdit');
 Route::post('/users/update/{user_id}', 'UsersController@userUpdate')->name('userUpdate');
-Route::get('/users/my_info/{user_id}', 'UsersController@myInfo')->name('myInfo');
+Route::get('/users/profile/{user_id}', 'UsersController@myInfo')->name('profile');
 
