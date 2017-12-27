@@ -2,37 +2,34 @@
 @extends('layouts.app')
 @push('css')
 <link rel="stylesheet" href="{{ URL::asset('css/posts.css') }}" />
+<link rel="stylesheet" href="{{ URL::asset('css/glyphicons.css') }}" />
 @endpush
 @section('content')
-
+    <div class="container">
     <!--- SEARCH block -->
     <span class="filter">
     <div class="row mt-5 mb-5">
-        <div class="col"></div>
-        <div class="form-row">
+        <div class="form-group">
         <form action="{{ route('post_search') }}" method="POST" class="form-inline">
-            <div class="col">
+            <div class="form-group">
+                <span class="input-group-addon">
             <select id="searchBy" class="form-control" name="searchBy">
                 <option value="title">Title</option>
                 <option value="content">Content</option>
-            </select>
-            </div>
-
+            </select>&nbsp;
             {{ csrf_field() }}
-            <div class="col">
-            <input type="text" class="form-control"  placeholder="Search by selected filter" name="search">
+            <input type="text" class="form-control"  placeholder="Search by selected filter" name="search" required>&nbsp;
+                <button type="submit" class="btn btn-primary"><img src="{{URL::asset('images/search_logo.png')}}" width="18" height="18"></span> Search</button>
             </div>
-            <div class="col">
-            <button type="submit" class="btn btn-primary btn">Search</button></span></div>
             </form>
-
-        </div>
-        <div class="col"></div>
     </div>
+        </div>
+        </span>
+       </span>
+
     <!--- Search block --->
 
 
-    <div class="container">
         <div class="row">
 
                     </div>

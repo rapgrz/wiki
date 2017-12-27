@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @push('css')
+<link rel="stylesheet" href="{{ URL::asset('css/categories_edit.css') }}" />
 @endpush
 @section('content')
     @if($user->email == Auth::user()->email | Auth::user()->access_level == 10)
@@ -12,6 +13,9 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}"><br><br>
                         <input type="submit" class="btn btn-primary" value="Upload">
                     </form>
+                    <span class="cancel">
+                    <button class="btn btn-default" onclick="window.location='{{ URL::previous() }}'">Cancel</button>
+                    </span>
                 </div>
             </div>
         </div>
