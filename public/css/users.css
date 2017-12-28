@@ -1,12 +1,12 @@
 .edit{
     position: relative;
-    right: -5px;
+    right: 7px;
     top: 10px;
 }
 
 .destroy{
     position: relative;
-    left: 70px;
+    left: 40px;
     top: -15px;
 }
 

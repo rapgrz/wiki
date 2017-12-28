@@ -51,6 +51,7 @@
             </div><br><br>
             @endif
             <div class="col-sm-10">
+                <hr>
                 <div id="msg"></div>
                 <h3>Add comment</h3>
                 <form action="{{ route('addComment', ['post_id' => $post->id]) }}" method="POST" id="addComment">
@@ -60,7 +61,7 @@
                     <input type="hidden" id="add_comment_uri" value="{{ route('addComment', ['post_id' => $post->id]) }}">
                     <button type="submit" class="btn btn-primary" id="confirmAdd">Add comment</button>
                 </form>
-                <br>
+                <hr>
             </div>
                 <div class="col-sm-10">
                 <h3>Post comments</h3>

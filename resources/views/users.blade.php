@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @push('css')
-<link rel="stylesheet" href="{{ URL::asset('css/categories.css') }}" />
+<link rel="stylesheet" href="{{ URL::asset('css/users.css') }}" />
 @endpush
 @section('content')
 @if(Auth::user()->access_level == 10)
@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-md-7">
                 <label>Access level meaning</label>
-                <table class="table table-striped">
+                <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th scope="col">Access level id</th>
@@ -39,7 +39,7 @@
             <div class="row">
             <div class="col-md-7">
                 <label>Manage existing users</label>
-                <table class="table table-striped">
+                <table class="table table-striped table-bordered">
                     <thead>
                     <tr>
                         <th scope="col">Name</th>

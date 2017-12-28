@@ -23,7 +23,7 @@
                     <label for="title">Manage existing category</label>
 
 
-                <table class="table table-striped" id="categories_list">
+                <table class="table table-striped table-bordered" id="categories_list">
 
                     <thead>
                     <tr>
