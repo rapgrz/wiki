@@ -153,6 +153,7 @@ class PostsController extends Controller
             'content' => $comment->content,
             'post_id' => $comment->post_id,
             'user_id' => $comment->user_id,
+            'user_avatar' => $comment->user->avatar_path,
             'user_name' => Auth::user()->name,
             'comment_id' => $comment->id,
             'created_at' => $comment->created_at

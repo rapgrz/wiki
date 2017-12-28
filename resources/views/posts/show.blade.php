@@ -76,12 +76,18 @@
                         <div class="col-sm-11">
                             <div class="card">
                                 <div class="card-header">
-                                    <strong>{{ $comment->user->name }}</strong> <span class="text-muted">commented {{$comment->created_at}}</span>
+                                    <strong><a href="/wiki/public/users/profile/{{$comment->user->id }}">
+                                           {{ $comment->user->name }} </a></strong>&nbsp;
+                                    <span class="text-muted">commented {{$comment->created_at}}</span>
                                     @if($comment->user->email == Auth::user()->email || Auth::user()->access_level >= 5)
                                         <div class="buttons float-right">
-                                            <span class="editComment"><a href="{{ route('editComment',['comment_id' => $comment->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a></span>
+                                            <span class="editComment">
+                                                <a href="{{ route('editComment',['comment_id' => $comment->id ] ) }}"><img src="{{URL::asset('images/edit_logo.png')}}"  height="30" width="30"/></a>
+                                            </span>
                                             {{ Form::open([ 'id' => 'deleteComment', 'method'  => 'post', 'route' => [ 'destroyComment', $comment->id ] ]) }}
-                                            <span class="destroyComment"><input type="image" id='destroyComment' onclick="return confirm('Are you sure you want delete this comment?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/></span>
+                                            <span class="destroyComment">
+                                                <input type="image" id='destroyComment' onclick="return confirm('Are you sure you want delete this comment?')" src="{{URL::asset('images/trash_logo.png')}}" height="20" width="20"/>
+                                            </span>
                                             {{ Form::close() }}
                                         </div>
                                     @endif
@@ -167,6 +173,7 @@
             var user_name = data.user_name;
             var comment_id = data.comment_id;
             var created_at_raw = data.created_at.date;
+            var user_avatar = data.user_avatar;
             var myarr = created_at_raw.split(" ");
             var created_at = myarr[0]+" "+myarr[1].substring(0, 8);
             tinyMCE.activeEditor.setContent('');
@@ -176,15 +183,15 @@
             console.log(created_at);
             var newComment = "<div class='col-sm-1'>"
                     +"<div class='thumbnail'>"
-                    + "<img class='img-fluid user-photo' src='https://ssl.gstatic.com/accounts/ui/avatar_2x.png'>"
+                    + "<img class='img-fluid user-photo' src='http://localhost/wiki/storage/app/"+user_avatar+"'>"
                     + "</div>"
                     + "</div>"
                     + "<div class='col-sm-11'>"
                     + "<div class='card'>"
                     + "<div class='card-header'>"
                     + "<strong>"
-                    + user_name
-                    + "</strong> <span class='text-muted'>commented&nbsp;"
+                    + "<a href='/wiki/public/users/profile/"+user_id+"'>"+user_name+"</a>"
+                    + "</strong>&nbsp; <span class='text-muted'>commented&nbsp;"
                     + created_at
                     + "</span>"
                     + "@if('sadsadsad' == Auth::user()->email || Auth::user()->access_level >= 5)"
