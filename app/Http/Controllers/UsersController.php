@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Pagination\Paginator;
 use App\User;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 
 
 class UsersController extends Controller
@@ -83,8 +85,10 @@ class UsersController extends Controller
     
     public function userDelete($id){
         $user = User::findOrFail($id);
-        $user->delete();
 
+            $success = Storage::delete('http://localhost/wiki/storage/app/'.$user->avatar_path);
+
+        $user->delete();
         return redirect(route('users'));
     }
 }

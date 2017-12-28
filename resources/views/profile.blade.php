@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="{{ URL::asset('css/comments.css') }}" />
 @endpush
 @section('content')
-    @if($user->email == Auth::user()->email || Auth::user()->access_level >= 10)
     <div class="container mt-5 ml-5">
         <div class="row">
             <div class="col-md-9 ml-5">
@@ -17,9 +16,11 @@
                             <div class="col-md-4 text-center">
                                 <img class="rounded-circle avatar avatar-original" style="-webkit-user-select:none;
               display:block; margin:auto;" src="http://localhost/wiki/storage/app/{{$user->avatar_path}}" width="250" height="250"><br>
+                                @if($user->email == Auth::user()->email || Auth::user()->access_level >= 10)
                                 <form action="{{ route('uploadAvatar',['user_id' => $user->id ]) }}">
                                 <button class="btn btn-default">Change logo</button>
                                     </form>
+                                    @endif
                             </div>
                             <div class="col-md-8">
                                 <div class="row">
@@ -41,9 +42,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <hr>
+                                @if($user->email == Auth::user()->email || Auth::user()->access_level >= 10)
                                 <form action="{{ route('userEdit',['user_id' => $user->id ]) }}">
                                     <input type="submit" class="btn btn-primary float-right" value="Edit" />
                                 </form>
+                                    @endif
                             </div>
                         </div>
                     </div>
@@ -51,9 +54,6 @@
             </div>
         </div>
     </div>
-    @else
-        You have no permission to see this
-        @endif
 <hr>
 @endsection
 @push('scripts')

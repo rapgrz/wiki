@@ -29,7 +29,7 @@
 
     <!--- Search block --->
 
-
+        <!--- Category block -->
         <div class="row">
 
                     </div>
@@ -51,6 +51,9 @@
                         </span>
                     </div>
             </div>
+            <!--- Category block -->
+
+            <!--- Posts block -->
             <div class="col-md-10">
                 @foreach($posts as $post)
                     <div class="card">
@@ -70,8 +73,9 @@
                                 @endif</h3></div>
                         <div class="card-body"> {!! str_limit(html_entity_decode($post->content), 500) !!}</div>
                         <div class="card-footer">
-                            <img src="{{URL::asset('images/user_logo.png')}}" height="23" width="23">     {{ $post->user->name }} &nbsp; &nbsp;
-                            <img src="{{URL::asset('images/date_logo.png')}}" height="23" width="23"> {{  $post->created_at }} &nbsp; &nbsp;
+                            <a href="/wiki/public/users/profile/{{$post->user->id }}">
+                                <img src="{{URL::asset('images/user_logo.png')}}"  height="23" width="23"/>&nbsp; {{ $post->user->name }} </a>&nbsp; &nbsp;
+                            <img src="{{URL::asset('images/date_logo.png')}}" height="23" width="23"> &nbsp; {{  $post->created_at }} &nbsp; &nbsp;
                             <img src="{{URL::asset('images/comment_logo.png')}}" height="23" width="23"> &nbsp; {{ $post->comment->count()}} &nbsp;
                             <a href="{{ route('postShow', ['post_id' => $post->id]) }}"> Read full post.. </a>
                             <div class="cats float-right">
@@ -84,6 +88,8 @@
                 {{ $posts->links('') }}
             </div>
             </div>
+
+            <!--- Posts block -->
             </div>
 
 @endsection
