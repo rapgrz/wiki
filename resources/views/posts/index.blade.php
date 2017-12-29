@@ -75,7 +75,7 @@
                         <div class="card-footer">
                             <a href="/wiki/public/users/profile/{{$post->user->id }}">
                                 <img src="{{URL::asset('images/user_logo.png')}}"  height="23" width="23"/>&nbsp; {{ $post->user->name }} </a>&nbsp; &nbsp;
-                            <img src="{{URL::asset('images/date_logo.png')}}" height="23" width="23"> &nbsp; {{  $post->created_at }} &nbsp; &nbsp;
+                            <img src="{{URL::asset('images/date_logo.png')}}" height="23" width="23"> &nbsp; {{  $post->created_at->diffForHumans() }} &nbsp; &nbsp;
                             <img src="{{URL::asset('images/comment_logo.png')}}" height="23" width="23"> &nbsp; {{ $post->comment->count()}} &nbsp;
                             <a href="{{ route('postShow', ['post_id' => $post->id]) }}"> Read full post.. </a>
                             <div class="cats float-right">

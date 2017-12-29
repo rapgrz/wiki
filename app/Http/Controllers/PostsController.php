@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Input;
 use App\User;
 use App\Files;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
@@ -157,7 +158,7 @@ class PostsController extends Controller
             'user_avatar' => $comment->user->avatar_path,
             'user_name' => Auth::user()->name,
             'comment_id' => $comment->id,
-            'created_at' => $comment->created_at
+            'created_at' => $comment->created_at->diffForHumans()
         ]);
     }
     public function destroyComment($id){

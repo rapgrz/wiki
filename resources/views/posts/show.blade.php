@@ -36,7 +36,7 @@
                     <div class="card-footer">
                         <a href="/wiki/public/users/profile/{{$post->user->id }}">
                             <img src="{{URL::asset('images/user_logo.png')}}"  height="23" width="23"/>&nbsp; {{ $post->user->name }} </a> &nbsp; &nbsp;
-                        <img src="{{URL::asset('images/date_logo.png')}}" height="23" width="23"> {{  $post->created_at }} &nbsp; &nbsp;
+                        <img src="{{URL::asset('images/date_logo.png')}}" height="23" width="23"> {{  $post->created_at->diffForHumans() }} &nbsp; &nbsp;
                         <img src="{{URL::asset('images/comment_logo.png')}}" height="23" width="23"> &nbsp; {{ $post->comment->count()}} &nbsp;
                         <div class="float-right">
                             <img src="{{URL::asset('images/category_logo.png')}}" height="23" width="23"> {{ $post->category->name }}</div>
@@ -80,7 +80,7 @@
                                 <div class="card-header">
                                     <strong><a href="/wiki/public/users/profile/{{$comment->user->id }}">
                                            {{ $comment->user->name }} </a></strong>&nbsp;
-                                    <span class="text-muted">commented {{$comment->created_at}}</span>
+                                    <span class="text-muted">commented {{$comment->created_at->diffForHumans()}}</span>
                                     @if($comment->user->email == Auth::user()->email || Auth::user()->access_level >= 5)
                                         <div class="buttons float-right">
                                             <span class="editComment">
@@ -174,15 +174,12 @@
             var user_id = data.user_id;
             var user_name = data.user_name;
             var comment_id = data.comment_id;
-            var created_at_raw = data.created_at.date;
+            var created_at = data.created_at;
             var user_avatar = data.user_avatar;
-            var myarr = created_at_raw.split(" ");
-            var created_at = myarr[0]+" "+myarr[1].substring(0, 8);
             tinyMCE.activeEditor.setContent('');
             var edit_url = '{{ route('posts') }}/edit/comment/'+comment_id;
             var destroy_url = '/wiki/public/post/comment/'+comment_id;
 
-            console.log(created_at);
             var newComment = "<div class='col-sm-1'>"
                     +"<div class='thumbnail'>"
                     + "<img class='img-fluid user-photo' src='http://localhost/wiki/storage/app/"+user_avatar+"'>"
