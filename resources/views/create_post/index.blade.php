@@ -18,11 +18,10 @@
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select></div><br>
-                    <label for="file">Upload file</label><br>
-                    <label class="custom-file">
-                        <input type="file" id="file" name="file" class="custom-file-input">
-                        <span class="custom-file-control"></span>
-                    </label><br><br>
+                    <label for="file">Post files (you can attach more than one)</label>
+                    <br />
+                    <input type="file" name="file[]" multiple />
+                    <br /><br />
                     <input type="hidden" id="add_post_uri" value="{{ route('save_post')}}">
                     {{ csrf_field() }}
                     <textarea name="content" id="post_content"></textarea><br>

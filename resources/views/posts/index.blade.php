@@ -9,23 +9,23 @@
     <!--- SEARCH block -->
     <span class="filter">
     <div class="row mt-5 mb-5">
-        <div class="form-group">
+        <div class="form-inline">
         <form action="{{ route('post_search') }}" method="POST" class="form-inline">
-            <div class="form-group">
                 <span class="input-group-addon">
             <select id="searchBy" class="form-control" name="searchBy">
                 <option value="title">Title</option>
                 <option value="content">Content</option>
             </select>&nbsp;
             {{ csrf_field() }}
-            <input type="text" class="form-control"  placeholder="Search by selected filter" name="search" required>&nbsp;
-                <button type="submit" class="btn btn-primary"><img src="{{URL::asset('images/search_logo.png')}}" width="18" height="18"></span> Search</button>
+            <input type="text" class="form-control"  placeholder="Search by selected filter" name="search" required>&nbsp;&nbsp;&nbsp;
+
+                <button type="submit" class="btn btn-primary"><img src="{{URL::asset('images/search_logo.png')}}" width="18" height="18"> Search</button>
+                    </span>
+            </span>
             </div>
             </form>
     </div>
         </div>
-        </span>
-       </span>
 
     <!--- Search block --->
 

@@ -107,7 +107,7 @@
             var edit_url = '/wiki/public/categories/edit/'+id;
             var destroy_url = '/wiki/public/categories/delete/'+id;
 
-            var newRow = "<tr><td>"+name+"</td>"
+            var newRow = "<tr class='table-success'><td>"+name+"</td>"
                     + "<td>"
                     + "<span class='edit'><a href='"+edit_url+"'><img src='{{URL::asset('images/edit_logo.png')}}'  height='30' width='30'/></a></span>"
                     + "<form method='post' action='"+destroy_url+"'> <input type='hidden' name='_token' value='{{ csrf_token() }}'>"

@@ -52,22 +52,23 @@ class PostsController extends Controller
 
         $post = new PostModel();
 
-        $file = $request->file('file');
-        $file_path = $file->store('files');
-        $file_name = $file->getClientOriginalName();
         $post->content = $data['content'];
         $post->title = $data['title'];
         $post->category_id = $data['category_id'];
         $post->user_id =  Auth::user()->id;
         $post->save();
 
-        $saveFile = new Files();
+        foreach($request->file('file') as $file){
+            $file_path = $file->store('files');
+            $file_name = $file->getClientOriginalName();
+            $saveFile = new Files();
 
-        $saveFile->name = $file_name;
-        $saveFile->path = $file_path;
-        $saveFile->post_id = $post->id;
+            $saveFile->name = $file_name;
+            $saveFile->path = $file_path;
+            $saveFile->post_id = $post->id;
 
-        $saveFile->save();
+            $saveFile->save();
+        }
         return redirect(route('posts'));
     }
 

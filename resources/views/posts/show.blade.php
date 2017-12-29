@@ -34,7 +34,8 @@
                             @endif</h3></div>
                     <div class="card-body"> {!! html_entity_decode($post->content) !!}</div>
                     <div class="card-footer">
-                        <img src="{{URL::asset('images/user_logo.png')}}" height="23" width="23">     {{ $post->user->name }} &nbsp; &nbsp;
+                        <a href="/wiki/public/users/profile/{{$post->user->id }}">
+                            <img src="{{URL::asset('images/user_logo.png')}}"  height="23" width="23"/>&nbsp; {{ $post->user->name }} </a> &nbsp; &nbsp;
                         <img src="{{URL::asset('images/date_logo.png')}}" height="23" width="23"> {{  $post->created_at }} &nbsp; &nbsp;
                         <img src="{{URL::asset('images/comment_logo.png')}}" height="23" width="23"> &nbsp; {{ $post->comment->count()}} &nbsp;
                         <div class="float-right">
@@ -46,7 +47,7 @@
             <div class="col-sm-10">
                 <strong>Attached files</strong><br>
                 @foreach($post->files as $file)
-                    <a href="http://localhost/wiki/storage/app/{{$file->path}}" target="_blank" download><img src="{{URL::asset('images/folder_download.png')}}" height="40" width="40">&nbsp; {{ $file->name }}</a>
+                    <a href="http://localhost/wiki/storage/app/{{$file->path}}" target="_blank" download><img src="{{URL::asset('images/folder_download.png')}}" height="40" width="40">&nbsp; {{ $file->name }}</a><br>
                     @endforeach
             </div><br><br>
             @endif
