@@ -51,3 +51,15 @@
         left: 500px;
         top: 36px;
     }
+
+    .scrollToTop{
+        width:100px;
+        height:130px;
+        padding:10px;
+        position:fixed;
+        top:845px;
+        left: 1750px;
+    }
+    .scrollToTop:hover{
+        text-decoration:none;
+    }

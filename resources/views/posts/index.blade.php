@@ -2,7 +2,6 @@
 @extends('layouts.app')
 @push('css')
 <link rel="stylesheet" href="{{ URL::asset('css/posts.css') }}" />
-<link rel="stylesheet" href="{{ URL::asset('css/glyphicons.css') }}" />
 @endpush
 @section('content')
     <div class="container">
@@ -88,8 +87,30 @@
                 {{ $posts->links('') }}
             </div>
             </div>
-
+            <a href="#" class="scrollToTop">
+                <img src="{{URL::asset('images/top.png')}}"  height="100" width="100"/></a>&nbsp;
             <!--- Posts block -->
             </div>
 
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+        $(window).scroll(function(){
+         if ($(this).scrollTop() > 100) {
+             $('.scrollToTop').fadeIn();
+         } else {
+            $('.scrollToTop').fadeOut();
+         }
+        });
+
+        $('.scrollToTop').click(function(){
+        $('html, body').animate({scrollTop : 0},800);
+        return false;
+        });
+
+        });
+    </script>
+@endpush
 @endsection
