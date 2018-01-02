@@ -18,7 +18,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body bg-warning">
-                        <img src="{{URL::asset('images/statistics.png')}}"  height="23" width="23" align="bottom"/>&nbsp;
+                        <img src="{{URL::asset('images/statistics.png')}}"  height="23" width="23"/>&nbsp;
                             Total posts &nbsp;&nbsp;<strong><div class="counter d-inline float-right" data-count="{{$posts->count()}}">0</div></strong>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="card">
                         <div class="card-body bg-warning">
                             <img src="{{URL::asset('images/statistics.png')}}"  height="23" width="23"/>&nbsp;
-                            Total cotegories &nbsp;&nbsp;<strong><div class="counter d-inline float-right" data-count="{{$categories->count()}}">0</div></strong>
+                            Total categories &nbsp;&nbsp;<strong><div class="counter d-inline float-right" data-count="{{$categories->count()}}">0</div></strong>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,28 @@
                          </div>
                      </div>
              </div>
-        </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body bg-warning">
+                                <img src="{{URL::asset('images/title_logo.png')}}"  height="40" width="40"/>&nbsp;
+                                Latest post &nbsp;<br> <strong>{{$latestPost->title}}</strong><br>
+                                Created &nbsp; <div class="float-right"><strong>{{$latestPost->created_at}}</strong></div><br>
+                                By &nbsp;<div class="float-right"> <strong>{{$latestPost->user->name}}</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body bg-warning">
+                                <img src="{{URL::asset('images/comment_logo.png')}}"  height="23" width="23"/>&nbsp;
+                                Latest comment <br><strong>{!! str_limit(html_entity_decode($latestComment->content), 105) !!}</strong><br>
+                                On <strong>{{$latestComment->post->title}}</strong><br>
+                                Commented by <strong>{{$latestComment->user->name}}</strong>
+                                </div>
+                            </div>
+                    </div>
         </div>
         @else
         You have no permission to see this.

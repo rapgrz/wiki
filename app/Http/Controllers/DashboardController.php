@@ -32,13 +32,17 @@ class DashboardController extends Controller
         $users = User::all();
         $comments = Comment::all();
         $files = Files::all();
+        $latestPost = PostModel::latest()->first();
+        $latestComment = Comment::latest()->first();
 
         return view("dashboard", array(
             'posts' => $posts,
             'categories' => $categories,
             'users' => $users,
             'comments' => $comments,
-            'files' => $files
+            'files' => $files,
+            'latestPost' => $latestPost,
+            'latestComment' => $latestComment
         ));
     }
 }
