@@ -80,7 +80,10 @@
                                 <div class="card-header">
                                     <strong><a href="/wiki/public/users/profile/{{$comment->user->id }}">
                                            {{ $comment->user->name }} </a></strong>&nbsp;
-                                    <span class="text-muted">commented {{$comment->created_at->diffForHumans()}}</span>
+                                    <span class="text-muted">commented {{$comment->created_at->diffForHumans()}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    @if($comment->created_at != $comment->updated_at)
+                                            <span class="text-danger">edited {{$comment->updated_at->diffForHumans()}}</span>
+                                        @endif
                                     @if($comment->user->email == Auth::user()->email || Auth::user()->access_level >= 5)
                                         <div class="buttons float-right">
                                             <span class="editComment">

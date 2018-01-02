@@ -2,6 +2,7 @@
 
 @section('content')
     @if($comment->user->email == Auth::user()->email || Auth::user()->access_level >= 10)
+        <link rel="stylesheet" href="{{ URL::asset('css/categories_edit.css') }}" />
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=re7zhthqsbfs0nmulqlphm57zxh66y0dnhdlstrjxrlnkoiz"></script>
     <script>tinymce.init({
             selector:'textarea',
@@ -18,15 +19,17 @@
     </script>
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-7 mt-5">
 
                 <form action="{{ route('updateComment', ['comment_id' => $comment->id]) }}" method="POST">
-                    <label>Edit comment on post:</label>
+                    <h3>Edit comment on post:</h3>
                     {{ csrf_field() }}
                     <textarea name="content">{{$comment->content}}</textarea><br>
-                    <input type="submit" class="btn btn-primary" value="Update Comment">
+                    <input type="submit" class="btn btn-primary" value="Update">
                 </form>
-
+                <span class="cancel">
+            <button class="btn btn-default" onclick="window.location='{{ URL::previous() }}'">Cancel</button>
+                </span>
             </div>
         </div>
     </div>

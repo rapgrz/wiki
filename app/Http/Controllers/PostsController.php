@@ -188,7 +188,7 @@ class PostsController extends Controller
         $comment->content = Input::get('content');
         $comment->save();
 
-        return redirect(route('posts'));
+        return redirect(route('postShow', ['post_id' => $comment->post_id]));
 
     }
 }
