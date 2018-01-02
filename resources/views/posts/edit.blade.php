@@ -2,6 +2,7 @@
 
 @section('content')
     @if($post->user->email == Auth::user()->email || Auth::user()->access_level >= 3)
+        <link rel="stylesheet" href="{{ URL::asset('css/categories_edit.css') }}" />
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=re7zhthqsbfs0nmulqlphm57zxh66y0dnhdlstrjxrlnkoiz"></script>
     <script>tinymce.init({
             selector:'textarea',
@@ -34,7 +35,9 @@
                     <textarea name="content">{{$post->content}}</textarea><br>
                     <input type="submit" class="btn btn-primary" value="Update Post">
                 </form>
-
+                <span class="cancel">
+            <button class="btn btn-default" onclick="window.location='{{ URL::previous() }}'">Cancel</button>
+                </span>
             </div>
         </div>
     </div>

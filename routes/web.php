@@ -43,4 +43,5 @@ Route::post('/users/update/{user_id}', 'UsersController@userUpdate')->name('user
 Route::get('/users/profile/{user_id}', 'UsersController@profile')->name('profile');
 Route::get('/users/upload_avatar/{user_id}', 'UsersController@uploadAvatar')->name('uploadAvatar');
 Route::post('/users/saveAvatar', 'UsersController@saveAvatar')->name('saveAvatar');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 

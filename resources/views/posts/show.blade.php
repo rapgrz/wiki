@@ -80,7 +80,7 @@
                                 <div class="card-header">
                                     <strong><a href="/wiki/public/users/profile/{{$comment->user->id }}">
                                            {{ $comment->user->name }} </a></strong>&nbsp;
-                                    <span class="text-muted">commented {{$comment->created_at->diffForHumans()}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="text-muted">commented {{$comment->created_at->diffForHumans()}}</span>&nbsp;&nbsp;&nbsp;&nbsp;
                                     @if($comment->created_at != $comment->updated_at)
                                             <span class="text-danger">edited {{$comment->updated_at->diffForHumans()}}</span>
                                         @endif
@@ -221,29 +221,6 @@
             $("#confirmAdd").val('Add comment');
 
         });
-
-    });
-    $("#destroyNewComment").click(function (e) {
-        console.log("asdsadasd");
-            e.preventDefault();
-
-            var id = $("#comment_id").val();
-            var url = $("#delete_comment_url").val();
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('comment_id')
-                }
-            });
-
-            var req = $.ajax({
-                        method: "POST",
-                        url: url,
-                        data: {id: id}
-
-                    }
-            );
-            console.log(id);
 
     });
 
