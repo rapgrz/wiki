@@ -236,7 +236,7 @@
             var req = $.ajax({
                         method: "POST",
                         url: url,
-                        data: {id: id},
+                        data: {id: id}
 
                     }
             );

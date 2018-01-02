@@ -58,6 +58,10 @@ class UsersController extends Controller
         $avatar_name = $avatar->getClientOriginalName();
         $avatar_path = $avatar->store('avatars');
 
+        if($user->avatar_path != 'avatars/default.png'){
+            $success = Storage::disk()->delete('/'.$user->avatar_path);
+        }
+
         $user->avatar = $avatar_name;
         $user->avatar_path = $avatar_path;
 
@@ -85,8 +89,9 @@ class UsersController extends Controller
     
     public function userDelete($id){
         $user = User::findOrFail($id);
-
-            $success = Storage::delete('http://localhost/wiki/storage/app/'.$user->avatar_path);
+            if($user->avatar_path != 'avatars/default.png'){
+                $success = Storage::disk()->delete('/'.$user->avatar_path);
+            }
 
         $user->delete();
         return redirect(route('users'));
