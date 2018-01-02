@@ -75,6 +75,12 @@ class PostsController extends Controller
 
     public function destroy($id){
         $post = PostModel::findOrFail($id);
+        $fileCheck = Files::where('post_id', '=', $id);
+        if(isset($fileCheck)){
+            foreach ($post->files as $file){
+                $file = Storage::disk()->delete('/'.$file->path);
+            }
+        }
         $post->delete();
 
         return redirect(route('posts'));
