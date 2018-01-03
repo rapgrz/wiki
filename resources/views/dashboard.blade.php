@@ -53,9 +53,10 @@
                         <div class="card">
                             <div class="card-body bg-warning">
                                 <img src="{{URL::asset('images/title_logo.png')}}"  height="40" width="40"/>&nbsp;
-                                Latest post &nbsp;<br> <strong>{{$latestPost->title}}</strong><br>
-                                Created &nbsp; <div class="float-right"><strong>{{$latestPost->created_at}}</strong></div><br>
-                                By &nbsp;<div class="float-right"> <strong>{{$latestPost->user->name}}</strong></div>
+                                Latest post &nbsp;<br> <strong>{!! str_limit(html_entity_decode($latestPost->title), 40) !!}</strong><br>
+                                Comments &nbsp; <strong>{{$latestPost->comment->count()}}</strong><br>
+                                By &nbsp; <strong>{{$latestPost->user->name}}</strong><br>
+                                <div class="float-right"><i>{{$latestPost->created_at->diffForHumans()}}</i></div>
                                 </div>
                             </div>
                         </div>
@@ -64,8 +65,9 @@
                             <div class="card-body bg-warning">
                                 <img src="{{URL::asset('images/comment_logo.png')}}"  height="23" width="23"/>&nbsp;
                                 Latest comment <br><strong>{!! str_limit(html_entity_decode($latestComment->content), 105) !!}</strong><br>
-                                On <strong>{{$latestComment->post->title}}</strong><br>
+                                On <strong>{!! str_limit(html_entity_decode($latestComment->post->title), 40) !!}</strong><br>
                                 Commented by <strong>{{$latestComment->user->name}}</strong>
+                                <div class="float-right"><i>{{$latestComment->created_at->diffForHumans()}}</i></div>
                                 </div>
                             </div>
                     </div>

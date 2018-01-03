@@ -59,16 +59,20 @@ class PostsController extends Controller
         $post->user_id =  Auth::user()->id;
         $post->save();
 
-        foreach($request->file('file') as $file){
-            $file_path = $file->store('files');
-            $file_name = $file->getClientOriginalName();
-            $saveFile = new Files();
+        $files = $request->file('file');
 
-            $saveFile->name = $file_name;
-            $saveFile->path = $file_path;
-            $saveFile->post_id = $post->id;
+        if(isset($files)){
+            foreach($files as $file){
+                $file_path = $file->store('files');
+                $file_name = $file->getClientOriginalName();
+                $saveFile = new Files();
 
-            $saveFile->save();
+                $saveFile->name = $file_name;
+                $saveFile->path = $file_path;
+                $saveFile->post_id = $post->id;
+
+                $saveFile->save();
+            }
         }
         return redirect(route('posts'));
     }
