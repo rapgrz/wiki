@@ -117,21 +117,30 @@
                     url: uri,
                     success: function(data){
 
-                        console.log(data.dates);
+                        var labels = [];
+                        var dt = [];
+
+                        $.each( data.dates, function( key, value ) {
+                           labels.push(key);
+                           dt.push(value);
+                        });
+                       // console.log(dt);
+                        //console.log(data);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         var myChart = new Chart(ctx, {
                             type: 'line',
                             data: {
-                                labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30'],
+                                labels: labels,
                                 datasets: [{
                                     label: 'Posts by day',
-                                    data: [12, 19, 3, 5, 2, 3],
+                                    data: dt,
                                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                                     borderColor:  'rgba(54, 162, 235, 1)',
                                     borderWidth: 1
                                 }],
                                 fill: false
                             },
+
                             options: {
                                 scales: {
                                     xAxes: [{
@@ -139,6 +148,9 @@
                                         scaleLabel:{
                                             display: true,
                                             labelString: 'Day'
+                                        },
+                                        ticks: {
+                                            autoSkip:false
                                         }
                                     }],
                                     yAxes: [{

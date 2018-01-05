@@ -56,10 +56,11 @@ class DashboardController extends Controller
             ->orderBy( 'date' )
             ->get( [
                 DB::raw( 'DATE( created_at ) as date' ),
-                DB::raw( 'COUNT( * ) as "count"' )
+                DB::raw( 'COUNT( * ) as "count"')
             ] )
-            ->pluck( 'count', 'date' );
+            ->pluck('count', 'date');
         $dates = $dates->merge( $posts );
+
         return response()->json([
             'dates' => $dates
         ]);

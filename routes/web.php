@@ -46,3 +46,5 @@ Route::post('/users/saveAvatar', 'UsersController@saveAvatar')->name('saveAvatar
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::post('/dashboard', 'DashboardController@postsInThisMonth')->name('postsInThisMonth');
 
+Route::get('/datess', 'DashboardController@postsInThisMonth');
+
