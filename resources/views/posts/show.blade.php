@@ -182,6 +182,7 @@
             tinyMCE.activeEditor.setContent('');
             var edit_url = '{{ route('posts') }}/edit/comment/'+comment_id;
             var destroy_url = '/wiki/public/post/comment/'+comment_id;
+            console.log(data);
 
             var newComment = "<div class='col-sm-1'>"
                     +"<div class='thumbnail'>"

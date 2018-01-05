@@ -87,13 +87,14 @@
                 {{ $posts->links('') }}
             </div>
             </div>
+            <!--
             <a href="" class="scrollToTop">
                 <img src="{{URL::asset('images/top.png')}}"  height="100" width="100"/></a>&nbsp;
             <!--- Posts block -->
             </div>
 @endsection
 @push('scripts')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
 
         $(window).scroll(function(){
@@ -110,5 +111,5 @@
         });
 
         });
-    </script>
+    </script>->>
 @endpush

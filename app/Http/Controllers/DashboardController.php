@@ -45,4 +45,23 @@ class DashboardController extends Controller
             'latestComment' => $latestComment
         ));
     }
+    public function postsInThisMonth(){
+        $dates = collect();
+        foreach( range( -30, 0 ) AS $i ) {
+            $date = Carbon::now()->addDays( $i )->format( 'Y-m-d' );
+            $dates->put( $date, 0);
+        }
+        $posts = PostModel::where( 'created_at', '>=', $dates->keys()->first() )
+            ->groupBy( 'date' )
+            ->orderBy( 'date' )
+            ->get( [
+                DB::raw( 'DATE( created_at ) as date' ),
+                DB::raw( 'COUNT( * ) as "count"' )
+            ] )
+            ->pluck( 'count', 'date' );
+        $dates = $dates->merge( $posts );
+        return response()->json([
+            'dates' => $dates
+        ]);
+    }
 }

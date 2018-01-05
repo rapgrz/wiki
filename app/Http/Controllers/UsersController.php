@@ -89,6 +89,7 @@ class UsersController extends Controller
     
     public function userDelete($id){
         $user = User::findOrFail($id);
+        //$user->posts-id ir tada ieskot per files
             if($user->avatar_path != 'avatars/default.png'){
                 $success = Storage::disk()->delete('/'.$user->avatar_path);
             }
