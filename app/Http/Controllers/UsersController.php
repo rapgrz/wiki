@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Comment;
+use App\Files;
 use App\Post;
 use App\PostModel;
 use Illuminate\Http\Request;
@@ -93,6 +94,17 @@ class UsersController extends Controller
            $posts_ids[] =  $post->id;
         }
 
+        foreach ($posts_ids as $ids){
+            $files = Files::where('post_id', '=', $ids)->get();
+
+                if(isset($files)){
+                    foreach($files as $file){
+                        $success = Storage::disk()->delete('/'.$file->path);
+                    }
+                }
+
+
+        }
             if($user->avatar_path != 'avatars/default.png'){
                 $success = Storage::disk()->delete('/'.$user->avatar_path);
             }

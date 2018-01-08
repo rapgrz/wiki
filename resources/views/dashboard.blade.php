@@ -18,7 +18,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-body bg-warning">
-                        <input type="hidden" id="data_uri" value="{{ route('postsInThisMonth') }}">
+                        <input type="hidden" id="data_uri" value="{{ route('postsInThisMonth', ['range' => $range]) }}">
                         <img src="{{URL::asset('images/statistics.png')}}"  height="23" width="23"/>&nbsp;
                             Total posts &nbsp;&nbsp;<strong><div class="counter d-inline float-right" data-count="{{$posts->count()}}">0</div></strong>
                         </div>
@@ -76,12 +76,16 @@
                 </div>
             </div>
             <div class="row">
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <div class="float-right">
+                    Days shown:&nbsp;
+                    <select>
+                        <option selected value="-29">30</option>
+                        <option value="-59">60</option>
+                    </select>
+                </div>
             </div>
-            <br><br>
             <div class="row">
-                <button class="btn btn-primary" id="Add_day">Add day</button>&nbsp;
-                <button class="btn btn-primary d-inline" id="Remove_day">Remove day</button>
+                <canvas id="myChart" width="400" height="400"></canvas>
             </div>
             <br><br>
             </div>
@@ -104,7 +108,7 @@
         for(var i = 1; i <= days; i++){
             allDays.push(i);
         }*/
-
+        var range = -29;
         var uri = $("#data_uri").val();
         $.ajaxSetup({
             headers: {
@@ -115,8 +119,8 @@
         var req = $.ajax({
                     method: "POST",
                     url: uri,
-                    success: function(data){
 
+                    success: function(data){
                         var labels = [];
                         var dt = [];
 
@@ -169,6 +173,38 @@
                     }
                 }
         );
+        $('select').on('change', function() {
+            var range = ( this.value );
+            var uri = $("#data_uri").val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var req = $.ajax({
+                method: "POST",
+                url: uri,
+                data: {range: range},
+                success: function(data) {
+                    var labels = [];
+                    var dt = [];
+
+                    $.each( data.dates, function( key, value ) {
+                        labels.push(key);
+                        dt.push(value);
+                    });
+                    function addData(chart, label, data) {
+                        chart.data.labels.push(label);
+                        chart.data.datasets.forEach((dataset) => {
+                            dataset.data.push(data);
+                    });
+                        chart.update();
+                    }
+                    addData(myChart, labels, data);
+                }
+    });
+        });
     });
 </script>
 <script>
@@ -189,7 +225,6 @@
                     },
                     complete: function() {
                         $this.text(this.countNum);
-                        //alert('finished');
                     }
 
                 });

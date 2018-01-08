@@ -44,7 +44,7 @@ class PostsController extends Controller
     }
 
     public function savePost(Request $request){
-        $data = $request->all();
+       $data = $request->all();
 
         $validatedData = $request->validate([
             'content' => 'required|min:20',
@@ -58,6 +58,7 @@ class PostsController extends Controller
         $post->category_id = $data['category_id'];
         $post->user_id =  Auth::user()->id;
         $post->save();
+
 
         $files = $request->file('file');
 
@@ -74,6 +75,7 @@ class PostsController extends Controller
                 $saveFile->save();
             }
         }
+
         return redirect(route('posts'));
     }
 

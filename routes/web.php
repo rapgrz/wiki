@@ -44,7 +44,5 @@ Route::get('/users/profile/{user_id}', 'UsersController@profile')->name('profile
 Route::get('/users/upload_avatar/{user_id}', 'UsersController@uploadAvatar')->name('uploadAvatar');
 Route::post('/users/saveAvatar', 'UsersController@saveAvatar')->name('saveAvatar');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::post('/dashboard', 'DashboardController@postsInThisMonth')->name('postsInThisMonth');
-
-Route::get('/datess', 'DashboardController@postsInThisMonth');
+Route::post('/dashboard/{range}', 'DashboardController@postsInThisMonth')->name('postsInThisMonth');
 

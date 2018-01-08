@@ -9,7 +9,8 @@ use Illuminate\Http\Request;
 use Faker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
-
+use App\Files;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -31,6 +32,17 @@ class CategoryController extends Controller
     }
     public function destroy($id){
         $category = Category::findOrFail($id);
+        foreach ($category->post as $post){
+            $category_ids[] =  $post->id;
+            foreach ($category_ids as $ids){
+                $files = Files::where('post_id', '=', $ids)->get();
+            }
+        }
+        if(isset($files)){
+            foreach ($files as $file){
+                $success = Storage::disk()->delete('/'.$file->path);
+            }
+        }
         $category->delete();
 
         return redirect(route('categories'));

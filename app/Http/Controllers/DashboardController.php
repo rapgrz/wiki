@@ -42,12 +42,15 @@ class DashboardController extends Controller
             'comments' => $comments,
             'files' => $files,
             'latestPost' => $latestPost,
-            'latestComment' => $latestComment
+            'latestComment' => $latestComment,
+            'range' => '-29'
         ));
     }
-    public function postsInThisMonth(){
+    public function postsInThisMonth($range){
         $dates = collect();
-        foreach( range( -30, 0 ) AS $i ) {
+
+
+        foreach( range( $range, 0 ) AS $i ) {
             $date = Carbon::now()->addDays( $i )->format( 'Y-m-d' );
             $dates->put( $date, 0);
         }
