@@ -55,7 +55,9 @@
             <!--- Posts block -->
             <div class="col-md-10">
             @if($posts->count() == 0)
-            	No posts were found
+            	<div class="alert alert-danger text-center" role="alert">
+  					No posts were found
+					</div>
             	@endif
                 @foreach($posts as $post)
                     <div class="card">

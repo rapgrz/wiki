@@ -26,7 +26,13 @@ class DashboardController extends Controller
     }
     //
 
-    public function index(Request $request, $range = -29){
+    public function index(Request $request){
+
+        $range = '-29';
+        if ($request->isMethod('post')) {
+           $range = $request->input('range');
+        }
+
         $posts = PostModel::all();
         $categories = Category::all();
         $users = User::all();
@@ -34,7 +40,6 @@ class DashboardController extends Controller
         $files = Files::all();
         $latestPost = PostModel::latest()->first();
         $latestComment = Comment::latest()->first();
-        //$range = $request->input['range'];
 
 
         return view("dashboard", array(

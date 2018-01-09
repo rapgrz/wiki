@@ -78,11 +78,12 @@
             <div class="row">
                 <div class="float-right">
                     Days shown:&nbsp;
-                    <form action="{{route('postsInThisMonth', ['range' => $range])}}" id="range" method="POST" class="d-inline">
+                    <form action="{{route('dashboard')}}" id="range" method="POST" class="d-inline">
                         {{ csrf_field() }}
-                    <select id="range" onchange="this.form.submit()">
-                        <option value="-29">30</option>
-                        <option value="-59">60</option>
+                    <select id="range" name="range" onchange="this.form.submit()">
+                        <option value="-29" @if($range === '-29') selected @endif>30</option>
+                        <option value="-59" @if($range === '-59') selected @endif>60</option>
+                        <option value="-89" @if($range === '-89') selected @endif>90</option>
                     </select>
                         </form>
                 </div>
@@ -164,7 +165,7 @@
                                         display: true,
                                         scaleLabel:{
                                             display: true,
-                                            labelString: 'Value'
+                                            labelString: 'Posts'
                                         },
                                         ticks: {
                                             beginAtZero:true
