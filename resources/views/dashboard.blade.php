@@ -17,7 +17,7 @@
             <div class="row">
             <div class="col">
                 <div class="card">
-                    <div class="card-body bg-warning">
+                    <div class="card-body alert-warning">
                         <input type="hidden" id="data_uri" value="{{ route('postsInThisMonth', ['range' => $range]) }}">
                         <img src="{{URL::asset('images/statistics.png')}}"  height="23" width="23"/>&nbsp;
                             Total posts &nbsp;&nbsp;<strong><div class="counter d-inline float-right" data-count="{{$posts->count()}}">0</div></strong>
@@ -26,7 +26,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <div class="card-body bg-warning">
+                    <div class="card-body alert-warning">
                         <img src="{{URL::asset('images/statistics.png')}}"  height="23" width="23"/>&nbsp;
                             Total comments &nbsp;&nbsp;<strong><div class="counter d-inline float-right" data-count="{{$comments->count()}}">0</div></strong>
                         </div>
@@ -34,7 +34,7 @@
             </div>
                 <div class="col">
                     <div class="card">
-                        <div class="card-body bg-warning">
+                        <div class="card-body alert-warning">
                             <img src="{{URL::asset('images/statistics.png')}}"  height="23" width="23"/>&nbsp;
                             Total categories &nbsp;&nbsp;<strong><div class="counter d-inline float-right" data-count="{{$categories->count()}}">0</div></strong>
                         </div>
@@ -42,7 +42,7 @@
                 </div>
              <div class="col">
                  <div class="card">
-                     <div class="card-body bg-warning">
+                     <div class="card-body alert-warning">
                          <img src="{{URL::asset('images/statistics.png')}}"  height="23" width="23"/>&nbsp;
                             Total users &nbsp;&nbsp; <strong><div class="counter d-inline float-right" data-count="{{$users->count()}}">0</div></strong>
                          </div>
@@ -52,7 +52,7 @@
                 <div class="row mt-2">
                     <div class="col">
                         <div class="card">
-                            <div class="card-body bg-warning">
+                            <div class="card-body alert-warning">
                                 <img src="{{URL::asset('images/title_logo.png')}}"  height="40" width="40"/>&nbsp;
                                 Latest post &nbsp;<br> <strong>{!! str_limit(html_entity_decode($latestPost->title), 40) !!}</strong><br>
                                 Comments &nbsp; <strong>{{$latestPost->comment->count()}}</strong><br>
@@ -63,7 +63,7 @@
                         </div>
                     <div class="col">
                         <div class="card">
-                            <div class="card-body bg-warning">
+                            <div class="card-body alert-warning">
                                 <img src="{{URL::asset('images/comment_logo.png')}}"  height="23" width="23"/>&nbsp;
                                 Latest comment <br><strong>{!! str_limit(html_entity_decode($latestComment->content), 105) !!}</strong><br>
                                 On <strong>{!! str_limit(html_entity_decode($latestComment->post->title), 40) !!}</strong><br>

@@ -64,7 +64,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(Auth::user()->access_level == 10)
-                            <a class="dropdown-item" href="{{route('dashboard')}}">Admin dashboard</a>
+                            <a class="dropdown-item" href="{{route('dashboard')}}">Dashboard</a>
                             @endif
                             <a class="dropdown-item" href="{{route('profile', ['user_id' => Auth::user()->id])}}">Profile</a>
                             <div class="dropdown-divider"></div>
