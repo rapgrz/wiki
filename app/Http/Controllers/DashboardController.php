@@ -26,7 +26,7 @@ class DashboardController extends Controller
     }
     //
 
-    public function index(){
+    public function index(Request $request, $range = -29){
         $posts = PostModel::all();
         $categories = Category::all();
         $users = User::all();
@@ -34,6 +34,8 @@ class DashboardController extends Controller
         $files = Files::all();
         $latestPost = PostModel::latest()->first();
         $latestComment = Comment::latest()->first();
+        //$range = $request->input['range'];
+
 
         return view("dashboard", array(
             'posts' => $posts,
@@ -43,7 +45,7 @@ class DashboardController extends Controller
             'files' => $files,
             'latestPost' => $latestPost,
             'latestComment' => $latestComment,
-            'range' => '-29'
+            'range' => $range
         ));
     }
     public function postsInThisMonth($range){

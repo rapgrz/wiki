@@ -54,6 +54,9 @@
 
             <!--- Posts block -->
             <div class="col-md-10">
+            @if($posts->count() == 0)
+            	No posts were found
+            	@endif
                 @foreach($posts as $post)
                     <div class="card">
                         <div class="card-header"><h3 class="card-title"><span class="title"><img src="{{URL::asset('images/title_logo.png')}}" height="40" width="40"></span>

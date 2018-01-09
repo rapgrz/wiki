@@ -90,12 +90,13 @@ class UsersController extends Controller
     
     public function userDelete($id){
         $user = User::findOrFail($id);
-        foreach ($user->post as $post){
-           $posts_ids[] =  $post->id;
-        }
+        if($user->post->count() > 0){
+            foreach ($user->post as $post){
+                $posts_ids[] =  $post->id;
+            }
 
-        foreach ($posts_ids as $ids){
-            $files = Files::where('post_id', '=', $ids)->get();
+            foreach ($posts_ids as $ids){
+                $files = Files::where('post_id', '=', $ids)->get();
 
                 if(isset($files)){
                     foreach($files as $file){
@@ -104,7 +105,9 @@ class UsersController extends Controller
                 }
 
 
+            }
         }
+
             if($user->avatar_path != 'avatars/default.png'){
                 $success = Storage::disk()->delete('/'.$user->avatar_path);
             }

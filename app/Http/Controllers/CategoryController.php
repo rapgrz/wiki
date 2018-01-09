@@ -32,6 +32,7 @@ class CategoryController extends Controller
     }
     public function destroy($id){
         $category = Category::findOrFail($id);
+        
         foreach ($category->post as $post){
             $category_ids[] =  $post->id;
             foreach ($category_ids as $ids){

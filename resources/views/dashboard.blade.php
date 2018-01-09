@@ -78,10 +78,13 @@
             <div class="row">
                 <div class="float-right">
                     Days shown:&nbsp;
-                    <select>
-                        <option selected value="-29">30</option>
+                    <form action="{{route('postsInThisMonth', ['range' => $range])}}" id="range" method="POST" class="d-inline">
+                        {{ csrf_field() }}
+                    <select id="range" onchange="this.form.submit()">
+                        <option value="-29">30</option>
                         <option value="-59">60</option>
                     </select>
+                        </form>
                 </div>
             </div>
             <div class="row">
@@ -171,41 +174,9 @@
                             }
                         });
                     }
-                }
-        );
-        $('select').on('change', function() {
-            var range = ( this.value );
-            var uri = $("#data_uri").val();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            var req = $.ajax({
-                method: "POST",
-                url: uri,
-                data: {range: range},
-                success: function(data) {
-                    var labels = [];
-                    var dt = [];
-
-                    $.each( data.dates, function( key, value ) {
-                        labels.push(key);
-                        dt.push(value);
-                    });
-                    function addData(chart, label, data) {
-                        chart.data.labels.push(label);
-                        chart.data.datasets.forEach((dataset) => {
-                            dataset.data.push(data);
-                    });
-                        chart.update();
-                    }
-                    addData(myChart, labels, data);
-                }
+        })
     });
-        });
-    });
+
 </script>
 <script>
     $('.counter').each(function() {
