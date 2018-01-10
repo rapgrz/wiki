@@ -31,6 +31,17 @@
                         <option value="{{ $category->id }}" @if($post->category->id == $category->id) selected @endif>{{ $category->name }}</option>
                         @endforeach
                     </select><br>
+                    @if(isset($files))
+                    <label for="title">Attached files</label><br>
+
+                    @foreach($files as $file)
+                    {{$file->name}} <br>
+                    @endforeach
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="Check" name="Check">
+                            <label class="form-check-label" for="Check">Delete existing files</label>
+                        </div>
+                    @endif
                     {{ csrf_field() }}
                     <textarea name="content">{{$post->content}}</textarea><br>
                     <input type="submit" class="btn btn-primary" value="Update Post">

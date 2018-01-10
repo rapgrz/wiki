@@ -94,17 +94,26 @@ class PostsController extends Controller
     
     public function edit($id){
         $post = PostModel::findOrFail($id);
+        $files = Files::where('post_id', '=', $id)->get();
         $categories = Category::all();
 
         return view('posts.edit', [
             'post' => $post,
-            'categories' => $categories
+            'categories' => $categories,
+            'files' => $files
         ]);
     }
 
     public function update($id){
         $post = PostModel::find($id);
-
+        $files = Files::where('post_id', '=', $id)->get();
+        $check = Input::get('Check');
+        if(isset($check)){
+            foreach ($files as $file){
+                $file = Storage::disk()->delete('/'.$file->path);
+            }
+            $files = Files::where('post_id', '=', $id)->delete();
+        }
         $post->title = Input::get('title');
         $post->content = Input::get('content');
         $post->category_id = Input::get('category_id');
