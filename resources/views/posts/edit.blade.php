@@ -31,16 +31,21 @@
                         <option value="{{ $category->id }}" @if($post->category->id == $category->id) selected @endif>{{ $category->name }}</option>
                         @endforeach
                     </select><br>
-                    @if(isset($files))
+                    @if($files->count() > 0)
                     <label for="title">Attached files</label><br>
-
+                    <div class="card">
+                        <div class="card-body">
                     @foreach($files as $file)
-                    {{$file->name}} <br>
+                    {{$file->name}} <hr>
                     @endforeach
-                        <div class="form-check">
+                        <div class="form-check float-right">
                             <input type="checkbox" class="form-check-input" id="Check" name="Check">
                             <label class="form-check-label" for="Check">Delete existing files</label>
                         </div>
+                        <br>
+                        </div>
+                    </div>
+                        <br>
                     @endif
                     {{ csrf_field() }}
                     <textarea name="content">{{$post->content}}</textarea><br>
