@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-md-7">
 
-                <form action="{{ route('post_update', ['post_id' => $post->id]) }}" method="POST">
+                <form action="{{ route('post_update', ['post_id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter Title" name="title" maxlength="70" value="{{$post->title}}" required><br>
                     <label for="category">Choose category</label>
@@ -30,6 +30,7 @@
                         @foreach($categories as $category):
                         <option value="{{ $category->id }}" @if($post->category->id == $category->id) selected @endif>{{ $category->name }}</option>
                         @endforeach
+                            {{ csrf_field() }}
                     </select><br>
                     @if($files->count() > 0)
                     <label for="title">Attached files</label><br>
@@ -47,7 +48,10 @@
                     </div>
                         <br>
                     @endif
-                    {{ csrf_field() }}
+                    <label for="file">Add files (you can attach more than one)</label>
+                    <br />
+                    <input type="file" name="file[]" multiple />
+                    <br /><br />
                     <textarea name="content">{{$post->content}}</textarea><br>
                     <input type="submit" class="btn btn-primary" value="Update Post">
                 </form>

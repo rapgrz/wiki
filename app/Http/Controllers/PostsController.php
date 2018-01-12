@@ -104,15 +104,29 @@ class PostsController extends Controller
         ]);
     }
 
-    public function update($id){
+    public function update(Request $request, $id){
         $post = PostModel::find($id);
         $files = Files::where('post_id', '=', $id)->get();
         $check = Input::get('Check');
+        $uploadFiles = $request->file('file');
         if(isset($check)){
             foreach ($files as $file){
                 $file = Storage::disk()->delete('/'.$file->path);
             }
             $files = Files::where('post_id', '=', $id)->delete();
+        }
+        if(isset($uploadFiles)){
+            foreach($uploadFiles as $uploadFile){
+                $file_path = $uploadFile->store('files');
+                $file_name = $uploadFile->getClientOriginalName();
+                $saveFile = new Files();
+
+                $saveFile->name = $file_name;
+                $saveFile->path = $file_path;
+                $saveFile->post_id = $id;
+
+                $saveFile->save();
+            }
         }
         $post->title = Input::get('title');
         $post->content = Input::get('content');
